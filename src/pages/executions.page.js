@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import apiclient from "../apiclient";
-import ExecutionList from "../components/executionList";
+import ExecutionCard from "../components/executionCard";
 import ExecutionChart from "../components/executionChart";
 import LoadingSpinner from "../components/loadingSpinner";
 
@@ -41,7 +41,7 @@ function Executions() {
           <div className="row">
             <div className="one-half column">
               {(!isLoading || executions.length > 0) && (
-                <ExecutionList key={i} execution={execution} />
+                <ExecutionCard key={i} execution={execution} />
               )}
             </div>
             <div className="one-half column">
