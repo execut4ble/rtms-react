@@ -3,6 +3,8 @@ import apiclient from "../apiclient";
 import Testcases from "../components/testcases";
 import FeatureInfo from "../components/featureInfo";
 import AddTestsCTA from "../components/AddTestsCTA";
+import EditFeature from "../components/modalEditFeature";
+import DeleteFeature from "../components/modalDeleteFeature";
 
 function FeatureTests(props) {
   const featureID = props.match.params.id;
@@ -32,6 +34,22 @@ function FeatureTests(props) {
               {featureInfo.map((feature, i) => (
                 <FeatureInfo key={i} feature={feature} />
               ))}
+              <div class="row">
+                <div class="two columns">
+                  {featureInfo.map((feature, i) => (
+                    <EditFeature
+                      key={i}
+                      feature={feature}
+                      featureInfo={featureInfo}
+                      setFeatureInfo={setFeatureInfo}
+                      featureID={featureID}
+                    />
+                  ))}
+                </div>
+                <div class="two columns">
+                  <DeleteFeature featureID={featureID} />
+                </div>
+              </div>
               {isEmpty && tests.length === 0 && <AddTestsCTA />}
               {tests.length > 0 && (
                 <table class="u-full-width">

@@ -5,7 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-function AddFeature({ features, setFeatures }) {
+function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -30,14 +30,14 @@ function AddFeature({ features, setFeatures }) {
     setOpen(false);
   };
 
-  const [newFeatureName, setNewFeature] = useState("a new feature...");
-  const [newDescription, setNewDescription] = useState("desc");
-  const [newTicket, setNewTicket] = useState("ticket");
-  const [newSprint, setNewSprint] = useState("sprint");
-  const [newSlug, setNewSlug] = useState("slug");
-  const [newAuthor, setNewAuthor] = useState("1");
+  const [newFeatureName, setNewFeature] = useState(feature.name);
+  const [newDescription, setNewDescription] = useState(feature.description);
+  const [newTicket, setNewTicket] = useState(feature.ticket);
+  const [newSprint, setNewSprint] = useState(feature.sprint);
+  const [newSlug, setNewSlug] = useState(feature.slug);
+  const [newAuthor, setNewAuthor] = useState("2");
 
-  const addFeature = (event) => {
+  const editFeature = (event) => {
     event.preventDefault();
     const featureObject = {
       name: newFeatureName,
@@ -45,17 +45,13 @@ function AddFeature({ features, setFeatures }) {
       sprint: newSprint,
       description: newDescription,
       slug: newSlug,
-      created_by: newAuthor,
+      last_modified_by: newAuthor,
+      id: featureID,
     };
 
-    apiclient.post("/features", featureObject).then((response) => {
-      setFeatures(
-        features.concat({
-          ...response.data,
-          testcases: "0",
-        })
-      );
-      console.log(response);
+    apiclient.put("/features/" + featureID, featureObject).then((response) => {
+      setFeatureInfo(featureInfo.fill(response.data));
+      console.log(featureInfo);
     });
   };
 
@@ -79,14 +75,10 @@ function AddFeature({ features, setFeatures }) {
     setNewSlug(event.target.value);
   };
 
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value);
-  };
-
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-plus"></i> Add feature
+        <i class="fas fa-pencil-alt"></i> Edit feature
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -102,9 +94,9 @@ function AddFeature({ features, setFeatures }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Add new feature</h2>
+            <h2 id="transition-modal-title">Edit feature</h2>
             <div id="transition-modal-description">
-              <form onSubmit={addFeature}>
+              <form onSubmit={editFeature}>
                 <div class="row">
                   <div class="four columns">
                     <label htmlFor="ticket">Ticket ID</label>
@@ -112,6 +104,7 @@ function AddFeature({ features, setFeatures }) {
                       class="u-full-width"
                       type="text"
                       id="ticket"
+                      value={newTicket}
                       onChange={handleTicketChange}
                     ></input>
                   </div>
@@ -122,6 +115,7 @@ function AddFeature({ features, setFeatures }) {
                       type="text"
                       placeholder="i.e. Sprint 4"
                       id="sprint"
+                      value={newSprint}
                       onChange={handleSprintChange}
                     ></input>
                   </div>
@@ -131,6 +125,7 @@ function AddFeature({ features, setFeatures }) {
                       class="u-full-width"
                       type="text"
                       id="slug"
+                      value={newSlug}
                       onChange={handleSlugChange}
                     ></input>
                   </div>
@@ -141,6 +136,7 @@ function AddFeature({ features, setFeatures }) {
                     class="u-full-width"
                     type="text"
                     id="featureTitle"
+                    value={newFeatureName}
                     onChange={handleFeatureChange}
                   ></input>
                 </div>
@@ -149,18 +145,9 @@ function AddFeature({ features, setFeatures }) {
                   class="u-full-width"
                   placeholder="Describe the testing to be done with this feature"
                   id="description"
+                  value={newDescription}
                   onChange={handleDescriptionChange}
                 ></textarea>
-                <div class="row">
-                  <label htmlFor="author">Author</label>
-                  <input
-                    value={newAuthor}
-                    type="text"
-                    id="author"
-                    onChange={handleAuthorChange}
-                    disabled
-                  ></input>
-                </div>
                 <input
                   class="button-primary"
                   type="submit"
@@ -176,4 +163,4 @@ function AddFeature({ features, setFeatures }) {
   );
 }
 
-export default AddFeature;
+export default EditFeature;

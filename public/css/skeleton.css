@@ -307,7 +307,7 @@ input[type="button"] {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
-  color: #ccc;
+  color: #8c8c8c;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
@@ -340,11 +340,10 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: #da5454;
   border-color: #da5454;
   outline: 0;
   cursor: pointer;
-  color: #fff;
+  color: #da5454;
   transition: color 0.4s ease-in-out;
   transition: border 0.4s ease-in-out;
 }
@@ -387,7 +386,6 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-  color: #fff;
   border-color: #1eaedb;
 }
 
@@ -410,8 +408,88 @@ input[type="button"].button-primary:focus {
   transform: translate3d(-50%, -50%, 0) scale3d(20, 20, 20);
 }
 
+.crud {
+  position: relative;
+  height: 30px;
+  padding: 0;
+  color: #a2a2a2;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+}
+
+.crud:hover {
+  color: #a2a2a2;
+}
+
+.crud:focus {
+  color: #a2a2a2;
+}
+
+.crud::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #a2a2a2;
+  right: 0;
+  height: 2px;
+  background-color: #da5454;
+  transform-origin: bottom right;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.crud:hover::before {
+  color: #a2a2a2;
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
+
+.button.button-delete,
+button.button-delete,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #fff;
+  background-color: #da5454;
+  border-color: #da5454;
+}
+.button.button-delete:hover,
+button.button-delete:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  border-color: #a02626;
+}
+
+.button.button-delete::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: #da5454;
+  transform-origin: center;
+  transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
+  transition: transform 0.45s ease-in-out;
+}
+
+.button.button-delete:hover::before {
+  transform: translate3d(-50%, -50%, 0) scale3d(20, 20, 20);
+}
+
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -558,7 +636,7 @@ p,
 ul,
 ol,
 form {
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 /* Utilities
