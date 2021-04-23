@@ -20,7 +20,7 @@ const ExecutionTestsTable = ({ test }) => {
         <Link to={`/features/${test.feature}`}>{test.feature_name}</Link>
       </td>
       <td>{test.scenario}</td>
-      <td style={{ textTransform: "capitalize" }}>{test.status}</td>
+      <td style={{ textTransform: "uppercase" }}>{test.status}</td>
     </tr>
   );
 };

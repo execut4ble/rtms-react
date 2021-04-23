@@ -22,7 +22,7 @@ const Testcases = ({ test }) => {
       <td>{test.id}</td>
       <td>{test.scenario}</td>
       <td>{formatDate(test.last_execution_date)}</td>
-      <td style={{ textTransform: "capitalize" }}>{test.status}</td>
+      <td style={{ textTransform: "uppercase" }}>{test.status}</td>
     </tr>
   );
 };

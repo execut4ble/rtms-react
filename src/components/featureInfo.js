@@ -24,6 +24,7 @@ function FeatureInfo({ feature }) {
       <h3>{feature.name}</h3>
 
       <p className="feature-description">{feature.description}</p>
+      <br />
       <p className="feature-metadata">
         Created by: {feature.created_user} at {formatDate(feature.created_date)}
         <br />

@@ -3,6 +3,7 @@ import apiclient from "../apiclient";
 import ExecutionCard from "../components/executionCard";
 import ExecutionChart from "../components/executionChart";
 import LoadingSpinner from "../components/loadingSpinner";
+import AddExecution from "../components/modalAddExecution";
 
 function Executions() {
   const [executions, setExecutions] = useState([]);
@@ -36,6 +37,7 @@ function Executions() {
       <div className="container">
         <p className="feed-description"></p>
         <h3 className="section-heading">Test Executions</h3>
+        <AddExecution executions={executions} setExecutions={setExecutions} />
         {isLoading && executions.length === 0 && <LoadingSpinner />}
         {executions.map((execution, i) => (
           <div className="row">

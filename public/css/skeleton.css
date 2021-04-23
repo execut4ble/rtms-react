@@ -557,6 +557,11 @@ label > .label-body {
   font-weight: normal;
 }
 
+.activeChkBox {
+  display: inline;
+  margin: 5pt;
+}
+
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 ul {

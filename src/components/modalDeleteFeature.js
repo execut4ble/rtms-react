@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import apiclient from "../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -6,6 +7,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 function DeleteFeature({ featureID }) {
+  const history = useHistory();
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -35,6 +37,8 @@ function DeleteFeature({ featureID }) {
 
     apiclient.delete("/features/" + featureID).then((response) => {
       console.log(response);
+
+      history.push("/features");
     });
   };
 
