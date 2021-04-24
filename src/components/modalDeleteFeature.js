@@ -45,7 +45,7 @@ function DeleteFeature({ featureID }) {
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-trash-alt"></i> Remove feature
+        <i className="fas fa-trash-alt"></i> Remove feature
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -70,13 +70,13 @@ function DeleteFeature({ featureID }) {
               testcases in executions.
               <form onSubmit={deleteFeature}>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Remove"
                   onClick={handleClose}
                 ></input>
                 <input
-                  class="button-delete"
+                  className="button-delete"
                   type="button"
                   value="Cancel"
                   onClick={handleClose}

@@ -40,7 +40,7 @@ function AddExecution({ executions, setExecutions }) {
   const [newSlug, setNewSlug] = useState("slug");
   const [newActiveState, setActive] = useState(false);
   const [newAuthor, setNewAuthor] = useState("1");
-  const [selectedFeature, setSelectedFeature] = useState("");
+  const [selectedFeatures, setSelectedFeatures] = useState([""]);
 
   const addExecution = (event) => {
     event.preventDefault();
@@ -49,7 +49,7 @@ function AddExecution({ executions, setExecutions }) {
       slug: newSlug,
       is_active: newActiveState,
       created_by: newAuthor,
-      feature: selectedFeature,
+      feature: selectedFeatures,
     };
 
     apiclient.post("/runs", executionObject).then((response) => {
@@ -84,14 +84,24 @@ function AddExecution({ executions, setExecutions }) {
     setNewAuthor(event.target.value);
   };
 
-  const handleSelectedFeature = (event) => {
-    setSelectedFeature(event.target.value);
+  const handleAddBulk = () => {
+    setSelectedFeatures(selectedFeatures.concat(""));
+  };
+
+  const handleRemoveFromBulk = () => {
+    setSelectedFeatures(selectedFeatures.slice(1));
+  };
+
+  const handleSelectFeature = (event, index) => {
+    console.log(event);
+    selectedFeatures[index] = event.target.value;
+    setSelectedFeatures([...selectedFeatures]);
   };
 
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-plus"></i> New test execution
+        <i className="fas fa-plus"></i> New test execution
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -110,8 +120,8 @@ function AddExecution({ executions, setExecutions }) {
             <h2 id="transition-modal-title">Add new test execution</h2>
             <div id="transition-modal-description">
               <form onSubmit={addExecution}>
-                <div class="row">
-                  <div class="six columns">
+                <div className="row">
+                  <div className="six columns">
                     <label htmlFor="author">Author</label>
                     <input
                       value={newAuthor}
@@ -121,39 +131,62 @@ function AddExecution({ executions, setExecutions }) {
                       disabled
                     ></input>
                   </div>
-                  <div class="six columns">
+                  <div className="six columns">
                     <label htmlFor="slug">Slug</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="slug"
                       onChange={handleSlugChange}
                     ></input>
                   </div>
                 </div>
-                <div class="full-width">
+                <div className="full-width">
                   <label htmlFor="executionTitle">Title</label>
                   <input
-                    class="u-full-width"
+                    className="u-full-width"
                     type="text"
                     id="executionTitle"
                     onChange={handleExecutionChange}
                   ></input>
                 </div>
-                <div class="row">
+                <div className="row">
                   <label htmlFor="featureSelect">Features to test</label>
-                  <select
-                    class="u-full-width"
-                    id="featureSelect"
-                    onChange={handleSelectedFeature}
-                  >
-                    {features.map((feature, i) => (
-                      <FeatureListOptions key={i} feature={feature} />
-                    ))}
-                  </select>
-                  <i class="fas fa-plus"></i>
+                  {selectedFeatures.map((select, i) => (
+                    <div className="row" key={i}>
+                      <select
+                        className="u-full-width"
+                        id="featureSelect"
+                        onChange={(e) => handleSelectFeature(e, i)}
+                      >
+                        {features.map((feature, index) => (
+                          <FeatureListOptions key={index} feature={feature} />
+                        ))}
+                      </select>
+                    </div>
+                  ))}
                 </div>
-                <div class="row">
+                <div className="row">
+                  <div className="two columns">
+                    <button
+                      className="crud"
+                      type="button"
+                      onClick={handleAddBulk}
+                    >
+                      <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                  <div className="two columns">
+                    <button
+                      className="crud"
+                      type="button"
+                      onClick={handleRemoveFromBulk}
+                    >
+                      <i className="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div className="row">
                   <input
                     type="checkbox"
                     checked={newActiveState}
@@ -165,7 +198,7 @@ function AddExecution({ executions, setExecutions }) {
                   </label>
                 </div>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Submit"
                   onClick={handleClose}

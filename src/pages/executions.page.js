@@ -23,7 +23,7 @@ function Executions() {
   };
 
   useEffect(() => {
-    loopExecutions(1, page);
+    loopExecutions();
   }, []);
 
   const handleShowMoreExecutions = () => {
@@ -40,14 +40,14 @@ function Executions() {
         <AddExecution executions={executions} setExecutions={setExecutions} />
         {isLoading && executions.length === 0 && <LoadingSpinner />}
         {executions.map((execution, i) => (
-          <div className="row">
+          <div className="row" key={i}>
             <div className="one-half column">
               {(!isLoading || executions.length > 0) && (
-                <ExecutionCard key={i} execution={execution} />
+                <ExecutionCard execution={execution} />
               )}
             </div>
             <div className="one-half column">
-              <ExecutionChart key={i} execution={execution} />
+              <ExecutionChart execution={execution} />
             </div>
           </div>
         ))}

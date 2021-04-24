@@ -5,7 +5,13 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
+function EditFeature({
+  feature,
+  featureInfo,
+  setFeatureInfo,
+  featureID,
+  featureIndex,
+}) {
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -50,7 +56,8 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
     };
 
     apiclient.put("/features/" + featureID, featureObject).then((response) => {
-      setFeatureInfo(featureInfo.fill(response.data));
+      featureInfo[featureIndex] = response.data;
+      setFeatureInfo([...featureInfo]);
       console.log(featureInfo);
     });
   };
@@ -78,7 +85,7 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-pencil-alt"></i> Edit feature
+        <i className="fas fa-pencil-alt"></i> Edit feature
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -97,21 +104,21 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
             <h2 id="transition-modal-title">Edit feature</h2>
             <div id="transition-modal-description">
               <form onSubmit={editFeature}>
-                <div class="row">
-                  <div class="four columns">
+                <div className="row">
+                  <div className="four columns">
                     <label htmlFor="ticket">Ticket ID</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="ticket"
                       value={newTicket}
                       onChange={handleTicketChange}
                     ></input>
                   </div>
-                  <div class="four columns">
+                  <div className="four columns">
                     <label htmlFor="sprint">Sprint</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       placeholder="i.e. Sprint 4"
                       id="sprint"
@@ -119,10 +126,10 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
                       onChange={handleSprintChange}
                     ></input>
                   </div>
-                  <div class="four columns">
+                  <div className="four columns">
                     <label htmlFor="slug">Slug</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="slug"
                       value={newSlug}
@@ -130,10 +137,10 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
                     ></input>
                   </div>
                 </div>
-                <div class="full-width">
+                <div className="full-width">
                   <label htmlFor="featureTitle">Title</label>
                   <input
-                    class="u-full-width"
+                    className="u-full-width"
                     type="text"
                     id="featureTitle"
                     value={newFeatureName}
@@ -142,14 +149,14 @@ function EditFeature({ feature, featureInfo, setFeatureInfo, featureID }) {
                 </div>
                 <label htmlFor="description">Description</label>
                 <textarea
-                  class="u-full-width"
+                  className="u-full-width"
                   placeholder="Describe the testing to be done with this feature"
                   id="description"
                   value={newDescription}
                   onChange={handleDescriptionChange}
                 ></textarea>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Submit"
                   onClick={handleClose}

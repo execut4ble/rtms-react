@@ -86,7 +86,7 @@ function AddFeature({ features, setFeatures }) {
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-plus"></i> Add feature
+        <i className="fas fa-plus"></i> Add feature
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -105,40 +105,40 @@ function AddFeature({ features, setFeatures }) {
             <h2 id="transition-modal-title">Add new feature</h2>
             <div id="transition-modal-description">
               <form onSubmit={addFeature}>
-                <div class="row">
-                  <div class="four columns">
+                <div className="row">
+                  <div className="four columns">
                     <label htmlFor="ticket">Ticket ID</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="ticket"
                       onChange={handleTicketChange}
                     ></input>
                   </div>
-                  <div class="four columns">
+                  <div className="four columns">
                     <label htmlFor="sprint">Sprint</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       placeholder="i.e. Sprint 4"
                       id="sprint"
                       onChange={handleSprintChange}
                     ></input>
                   </div>
-                  <div class="four columns">
+                  <div className="four columns">
                     <label htmlFor="slug">Slug</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="slug"
                       onChange={handleSlugChange}
                     ></input>
                   </div>
                 </div>
-                <div class="full-width">
+                <div className="full-width">
                   <label htmlFor="featureTitle">Title</label>
                   <input
-                    class="u-full-width"
+                    className="u-full-width"
                     type="text"
                     id="featureTitle"
                     onChange={handleFeatureChange}
@@ -146,12 +146,12 @@ function AddFeature({ features, setFeatures }) {
                 </div>
                 <label htmlFor="description">Description</label>
                 <textarea
-                  class="u-full-width"
+                  className="u-full-width"
                   placeholder="Describe the testing to be done with this feature"
                   id="description"
                   onChange={handleDescriptionChange}
                 ></textarea>
-                <div class="row">
+                <div className="row">
                   <label htmlFor="author">Author</label>
                   <input
                     value={newAuthor}
@@ -162,7 +162,7 @@ function AddFeature({ features, setFeatures }) {
                   ></input>
                 </div>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Submit"
                   onClick={handleClose}

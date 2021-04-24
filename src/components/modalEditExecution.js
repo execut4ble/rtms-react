@@ -10,6 +10,7 @@ function EditExecution({
   executionInfo,
   setExecutionInfo,
   executionID,
+  executionIndex,
 }) {
   const useStyles = makeStyles((theme) => ({
     modal: {
@@ -51,8 +52,9 @@ function EditExecution({
     };
 
     apiclient.put("/runs/" + executionID, executionObject).then((response) => {
-      setExecutionInfo(executionInfo.fill(response.data));
-      console.log(response);
+      executionInfo[executionIndex] = response.data;
+      setExecutionInfo([...executionInfo]);
+      console.log(response.data);
     });
   };
 
@@ -76,7 +78,7 @@ function EditExecution({
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-pencil-alt"></i> Edit test execution
+        <i className="fas fa-pencil-alt"></i> Edit test execution
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -95,8 +97,8 @@ function EditExecution({
             <h2 id="transition-modal-title">Edit test execution</h2>
             <div id="transition-modal-description">
               <form onSubmit={editExecution}>
-                <div class="row">
-                  <div class="six columns">
+                <div className="row">
+                  <div className="six columns">
                     <label htmlFor="author">Author</label>
                     <input
                       value={newAuthor}
@@ -106,10 +108,10 @@ function EditExecution({
                       disabled
                     ></input>
                   </div>
-                  <div class="six columns">
+                  <div className="six columns">
                     <label htmlFor="slug">Slug</label>
                     <input
-                      class="u-full-width"
+                      className="u-full-width"
                       type="text"
                       id="slug"
                       value={newSlug}
@@ -117,17 +119,17 @@ function EditExecution({
                     ></input>
                   </div>
                 </div>
-                <div class="full-width">
+                <div className="full-width">
                   <label htmlFor="executionTitle">Title</label>
                   <input
-                    class="u-full-width"
+                    className="u-full-width"
                     type="text"
                     id="executionTitle"
                     value={newExecutionName}
                     onChange={handleExecutionChange}
                   ></input>
                 </div>
-                <div class="row">
+                <div className="row">
                   <input
                     type="checkbox"
                     checked={newActiveState}
@@ -139,7 +141,7 @@ function EditExecution({
                   </label>
                 </div>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Submit"
                   onClick={handleClose}

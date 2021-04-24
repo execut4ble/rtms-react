@@ -24,15 +24,15 @@ function ExecuteTests(props) {
 
   return (
     <div className="feature-testcases">
-      <div class="section livefeed" id="feed">
-        <div class="container">
-          <div class="row">
-            <div class="twelve columns">
+      <div className="section livefeed" id="feed">
+        <div className="container">
+          <div className="row">
+            <div className="twelve columns">
               {executionInfo.map((execution, i) => (
                 <ExecutionInfo key={i} execution={execution} />
               ))}
-              <div class="row">
-                <div class="two columns">
+              <div className="row">
+                <div className="two columns">
                   {executionInfo.map((execution, i) => (
                     <EditExecution
                       key={i}
@@ -40,15 +40,16 @@ function ExecuteTests(props) {
                       executionInfo={executionInfo}
                       setExecutionInfo={setExecutionInfo}
                       executionID={executionID}
+                      executionIndex={i}
                     />
                   ))}
                 </div>
-                <div class="two columns">
+                <div className="two columns">
                   <DeleteExecution executionID={executionID} />
                 </div>
               </div>
 
-              <table class="u-full-width">
+              <table className="u-full-width">
                 <thead>
                   <tr>
                     <th>Feature</th>
@@ -64,7 +65,7 @@ function ExecuteTests(props) {
               </table>
             </div>
           </div>
-          {/* <a class="button button-primary" href="#browse">
+          {/* <a className="button button-primary" href="#browse">
             Load more
           </a> */}
         </div>

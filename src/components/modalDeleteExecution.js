@@ -45,7 +45,7 @@ function DeleteExecution({ executionID }) {
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i class="fas fa-trash-alt"></i> Remove execution
+        <i className="fas fa-trash-alt"></i> Remove execution
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -70,13 +70,13 @@ function DeleteExecution({ executionID }) {
               Consider setting execution as inactive instead.
               <form onSubmit={deleteExecution}>
                 <input
-                  class="button-primary"
+                  className="button-primary"
                   type="submit"
                   value="Remove"
                   onClick={handleClose}
                 ></input>
                 <input
-                  class="button-delete"
+                  className="button-delete"
                   type="button"
                   value="Cancel"
                   onClick={handleClose}
