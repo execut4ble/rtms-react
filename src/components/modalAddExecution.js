@@ -38,7 +38,7 @@ function AddExecution({ executions, setExecutions }) {
 
   const [newExecutionName, setNewExecution] = useState("a new execution...");
   const [newSlug, setNewSlug] = useState("slug");
-  const [newActiveState, setActive] = useState("false");
+  const [newActiveState, setActive] = useState(false);
   const [newAuthor, setNewAuthor] = useState("1");
   const [selectedFeature, setSelectedFeature] = useState("");
 
@@ -56,8 +56,11 @@ function AddExecution({ executions, setExecutions }) {
       setExecutions(
         executions.concat({
           ...response.data,
-          testcase_count: features.length,
-          tbd: features.length,
+          name: executionObject.name,
+          testcase_count: response.data.testcase_count,
+          tbd: response.data.testcase_count,
+          passed: "0",
+          failed: "0",
         })
       );
       console.log(response);
@@ -69,8 +72,8 @@ function AddExecution({ executions, setExecutions }) {
   };
 
   const handleActiveStateChange = (event) => {
-    setActive(event.target.value);
-    console.log(setSelectedFeature);
+    setActive(event.target.checked);
+    console.log(newActiveState);
   };
 
   const handleSlugChange = (event) => {
@@ -153,7 +156,7 @@ function AddExecution({ executions, setExecutions }) {
                 <div class="row">
                   <input
                     type="checkbox"
-                    value="false"
+                    checked={newActiveState}
                     id="isActive"
                     onChange={handleActiveStateChange}
                   ></input>
