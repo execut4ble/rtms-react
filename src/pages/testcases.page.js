@@ -59,7 +59,6 @@ function FeatureTests(props) {
                       <th>Test case ID</th>
                       <th>Scenario</th>
                       <th>Last execution date</th>
-                      <th>Last execution status</th>
                     </tr>
                   </thead>
                   <tbody>
