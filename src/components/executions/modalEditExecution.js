@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import apiclient from "../apiclient";
+import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import FeatureListOptions from "../components/featureOptionsList.js";
 
-function AddExecution({ executions, setExecutions }) {
-  const [features, setFeatures] = useState([]);
+function EditExecution({
+  execution,
+  executionInfo,
+  setExecutionInfo,
+  executionID,
+  executionIndex,
+}) {
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -26,44 +30,31 @@ function AddExecution({ executions, setExecutions }) {
 
   const handleOpen = () => {
     setOpen(true);
-    apiclient.get("/features").then((response) => {
-      const data = response.data;
-      setFeatures([features, ...data]);
-    });
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const [newExecutionName, setNewExecution] = useState("a new execution...");
-  const [newSlug, setNewSlug] = useState("slug");
-  const [newActiveState, setActive] = useState(false);
-  const [newAuthor, setNewAuthor] = useState("1");
-  const [selectedFeatures, setSelectedFeatures] = useState([""]);
+  const [newExecutionName, setNewExecution] = useState(execution.name);
+  const [newSlug, setNewSlug] = useState(execution.slug);
+  const [newActiveState, setActive] = useState(execution.is_active);
+  const [newAuthor, setNewAuthor] = useState("2");
 
-  const addExecution = (event) => {
+  const editExecution = (event) => {
     event.preventDefault();
     const executionObject = {
       name: newExecutionName,
       slug: newSlug,
       is_active: newActiveState,
-      created_by: newAuthor,
-      feature: selectedFeatures,
+      last_modified_by: newAuthor,
+      id: executionID,
     };
 
-    apiclient.post("/runs", executionObject).then((response) => {
-      setExecutions(
-        executions.concat({
-          ...response.data,
-          name: executionObject.name,
-          testcase_count: response.data.testcase_count,
-          tbd: response.data.testcase_count,
-          passed: "0",
-          failed: "0",
-        })
-      );
-      console.log(response);
+    apiclient.put("/runs/" + executionID, executionObject).then((response) => {
+      executionInfo[executionIndex] = response.data;
+      setExecutionInfo([...executionInfo]);
+      console.log(response.data);
     });
   };
 
@@ -84,24 +75,10 @@ function AddExecution({ executions, setExecutions }) {
     setNewAuthor(event.target.value);
   };
 
-  const handleAddBulk = () => {
-    setSelectedFeatures(selectedFeatures.concat(""));
-  };
-
-  const handleRemoveFromBulk = () => {
-    setSelectedFeatures(selectedFeatures.slice(1));
-  };
-
-  const handleSelectFeature = (event, index) => {
-    console.log(event);
-    selectedFeatures[index] = event.target.value;
-    setSelectedFeatures([...selectedFeatures]);
-  };
-
   return (
     <div>
       <button className="crud" type="button" onClick={handleOpen}>
-        <i className="fas fa-plus"></i> New test execution
+        <i className="fas fa-pencil-alt"></i> Edit test execution
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -117,9 +94,9 @@ function AddExecution({ executions, setExecutions }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Add new test execution</h2>
+            <h2 id="transition-modal-title">Edit test execution</h2>
             <div id="transition-modal-description">
-              <form onSubmit={addExecution}>
+              <form onSubmit={editExecution}>
                 <div className="row">
                   <div className="six columns">
                     <label htmlFor="author">Author</label>
@@ -137,6 +114,7 @@ function AddExecution({ executions, setExecutions }) {
                       className="u-full-width"
                       type="text"
                       id="slug"
+                      value={newSlug}
                       onChange={handleSlugChange}
                     ></input>
                   </div>
@@ -147,44 +125,9 @@ function AddExecution({ executions, setExecutions }) {
                     className="u-full-width"
                     type="text"
                     id="executionTitle"
+                    value={newExecutionName}
                     onChange={handleExecutionChange}
                   ></input>
-                </div>
-                <div className="row">
-                  <label htmlFor="featureSelect">Features to test</label>
-                  {selectedFeatures.map((select, i) => (
-                    <div className="row" key={i}>
-                      <select
-                        className="u-full-width"
-                        id="featureSelect"
-                        onChange={(e) => handleSelectFeature(e, i)}
-                      >
-                        {features.map((feature, index) => (
-                          <FeatureListOptions key={index} feature={feature} />
-                        ))}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-                <div className="row">
-                  <div className="two columns">
-                    <button
-                      className="crud"
-                      type="button"
-                      onClick={handleAddBulk}
-                    >
-                      <i className="fas fa-plus"></i>
-                    </button>
-                  </div>
-                  <div className="two columns">
-                    <button
-                      className="crud"
-                      type="button"
-                      onClick={handleRemoveFromBulk}
-                    >
-                      <i className="fas fa-minus"></i>
-                    </button>
-                  </div>
                 </div>
                 <div className="row">
                   <input
@@ -212,4 +155,4 @@ function AddExecution({ executions, setExecutions }) {
   );
 }
 
-export default AddExecution;
+export default EditExecution;

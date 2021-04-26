@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import apiclient from "../apiclient";
-import FeatureList from "../components/featureList";
+import FeatureList from "../components/features/featureList";
 import LoadingSpinner from "../components/loadingSpinner";
-import AddFeature from "../components/modalAddFeature";
+import AddFeature from "../components/features/modalAddFeature";
 
 function Features() {
   const [features, setFeatures] = useState([]);

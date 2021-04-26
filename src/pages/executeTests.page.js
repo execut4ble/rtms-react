@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import apiclient from "../apiclient";
-import ExecutionTestsTable from "../components/executionTestsTable";
-import ExecutionInfo from "../components/executionInfo";
-import EditExecution from "../components/modalEditExecution";
-import DeleteExecution from "../components/modalDeleteExecution";
+import ExecutionTestsTable from "../components/executions/executionTestsTable";
+import ExecutionInfo from "../components/executions/executionInfo";
+import EditExecution from "../components/executions/modalEditExecution";
+import DeleteExecution from "../components/executions/modalDeleteExecution";
 
 function ExecuteTests(props) {
   const executionID = props.match.params.id;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import apiclient from "../apiclient";
-import ExecutionCard from "../components/executionCard";
-import ExecutionChart from "../components/executionChart";
+import ExecutionCard from "../components/executions/executionCard";
+import ExecutionChart from "../components/executions/executionChart";
 import LoadingSpinner from "../components/loadingSpinner";
-import AddExecution from "../components/modalAddExecution";
+import AddExecution from "../components/executions/modalAddExecution";
 
 function Executions() {
   const [executions, setExecutions] = useState([]);

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import apiclient from "../apiclient";
-import Testcases from "../components/testcases";
-import FeatureInfo from "../components/featureInfo";
-import AddTestsCTA from "../components/AddTestsCTA";
-import EditFeature from "../components/modalEditFeature";
-import DeleteFeature from "../components/modalDeleteFeature";
+import Testcases from "../components/testcases/testcases";
+import FeatureInfo from "../components/features/featureInfo";
+import AddTestsCTA from "../components/features/AddTestsCTA";
+import EditFeature from "../components/features/modalEditFeature";
+import DeleteFeature from "../components/features/modalDeleteFeature";
+import AddTestcase from "../components/testcases/modalAddTestcase";
 
 function FeatureTests(props) {
   const featureID = props.match.params.id;
@@ -36,6 +37,14 @@ function FeatureTests(props) {
               ))}
               <div className="row">
                 <div className="two columns">
+                  <AddTestcase
+                    featureID={featureID}
+                    setTestcases={setTestcases}
+                    tests={tests}
+                  />
+                </div>
+                <div className="two columns">
+                  {/* sikari told me to add this loop i add yes */}
                   {featureInfo.map((feature, i) => (
                     <EditFeature
                       key={i}
@@ -59,11 +68,19 @@ function FeatureTests(props) {
                       <th>Test case ID</th>
                       <th>Scenario</th>
                       <th>Last execution date</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     {tests.map((test, i) => (
-                      <Testcases key={i} test={test} />
+                      <Testcases
+                        key={i}
+                        testcaseIndex={i}
+                        test={test}
+                        setTestcases={setTestcases}
+                        tests={tests}
+                        featureID={featureID}
+                      />
                     ))}
                   </tbody>
                 </table>
