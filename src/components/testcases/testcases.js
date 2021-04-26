@@ -40,6 +40,7 @@ const Testcases = ({ test, tests, setTestcases, testcaseIndex }) => {
           testcaseID={test.id}
           tests={tests}
           setTestcases={setTestcases}
+          testcaseIndex={testcaseIndex}
         />
       </td>
     </tr>

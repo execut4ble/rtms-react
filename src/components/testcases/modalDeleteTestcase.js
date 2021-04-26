@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
 import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-function DeleteTestcase({ featureID, testcaseID, tests, setTestcases }) {
-  const history = useHistory();
+function DeleteTestcase({
+  featureID,
+  testcaseID,
+  tests,
+  setTestcases,
+  testcaseIndex,
+}) {
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -38,8 +42,8 @@ function DeleteTestcase({ featureID, testcaseID, tests, setTestcases }) {
     apiclient
       .delete("/testcases/" + featureID + "/" + testcaseID)
       .then((response) => {
-        setTestcases(tests.slice(1));
-        console.log(response);
+        tests.splice(testcaseIndex, 1);
+        setTestcases([...tests]);
       });
   };
 
