@@ -59,7 +59,11 @@ function ExecuteTests(props) {
                 </thead>
                 <tbody>
                   {tests.map((test, i) => (
-                    <ExecutionTestsTable key={i} test={test} />
+                    <ExecutionTestsTable
+                      key={i}
+                      test={test}
+                      executionID={executionID}
+                    />
                   ))}
                 </tbody>
               </table>

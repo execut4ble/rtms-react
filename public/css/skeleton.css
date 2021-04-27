@@ -446,6 +446,45 @@ input[type="button"].button-primary:focus {
   transform: scaleX(1);
 }
 
+.execute {
+  color: #fff;
+  border-radius: 50px;
+  margin: 0;
+  height: 30px;
+  line-height: 0px;
+  border: 0;
+  width: 6em;
+  padding: 0;
+}
+
+.execute:hover::before {
+  color: #fff;
+}
+
+.execute::before {
+  color: #fff;
+}
+
+.execute:hover {
+  color: #fff;
+}
+
+.execute:focus {
+  color: #fff;
+}
+
+.execute.tbd {
+  background-color: #8e8e8e;
+}
+
+.execute.passed {
+  background-color: #2cb14a;
+}
+
+.execute.failed {
+  background-color: #c13c37;
+}
+
 .button.button-delete,
 button.button-delete,
 input[type="submit"].button-primary,
