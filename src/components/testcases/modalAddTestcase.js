@@ -30,8 +30,8 @@ function AddTestcase({ featureID, tests, setTestcases }) {
     setOpen(false);
   };
 
-  const [newTestcaseScenario, setNewTestcase] = useState("a new feature...");
-  const [newDescription, setNewDescription] = useState("desc");
+  const [newTestcaseScenario, setNewTestcase] = useState("new scenario...");
+  const [newDescription, setNewDescription] = useState("");
   const [newAuthor, setNewAuthor] = useState("1");
 
   const addTestcase = (event) => {
@@ -101,7 +101,7 @@ function AddTestcase({ featureID, tests, setTestcases }) {
                 <label htmlFor="description">Description</label>
                 <textarea
                   className="u-full-width"
-                  placeholder="Describe the testing to be done with this feature"
+                  placeholder="Describe testcase steps"
                   id="description"
                   onChange={handleDescriptionChange}
                 ></textarea>

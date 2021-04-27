@@ -31,9 +31,9 @@ function AddFeature({ features, setFeatures }) {
   };
 
   const [newFeatureName, setNewFeature] = useState("a new feature...");
-  const [newDescription, setNewDescription] = useState("desc");
-  const [newTicket, setNewTicket] = useState("ticket");
-  const [newSprint, setNewSprint] = useState("sprint");
+  const [newDescription, setNewDescription] = useState("");
+  const [newTicket, setNewTicket] = useState("TICKET-ID");
+  const [newSprint, setNewSprint] = useState("Sprint");
   const [newSlug, setNewSlug] = useState("slug");
   const [newAuthor, setNewAuthor] = useState("1");
 

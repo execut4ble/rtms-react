@@ -35,6 +35,7 @@ const Testcases = ({ test, tests, setTestcases, testcaseIndex }) => {
           featureID={test.feature}
           lastExecutionDate={test.last_execution_date}
         />
+
         <DeleteTestcase
           featureID={test.feature}
           testcaseID={test.id}

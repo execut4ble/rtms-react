@@ -48,7 +48,7 @@ function DeleteTestcase({
   };
 
   return (
-    <div>
+    <div className="six columns">
       <button className="crud" type="button" onClick={handleOpen}>
         <i className="fas fa-trash-alt"></i>
       </button>

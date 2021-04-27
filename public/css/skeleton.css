@@ -601,6 +601,10 @@ label > .label-body {
   margin: 5pt;
 }
 
+#description {
+  min-width: 400px;
+}
+
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 ul {

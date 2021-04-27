@@ -74,7 +74,7 @@ function EditTestcase({
   };
 
   return (
-    <div>
+    <div className="six columns">
       <button className="crud" type="button" onClick={handleOpen}>
         <i className="fas fa-pencil-alt"></i>
       </button>
@@ -108,7 +108,7 @@ function EditTestcase({
                 <label htmlFor="description">Description</label>
                 <textarea
                   className="u-full-width"
-                  placeholder="Describe the testing to be done with this feature"
+                  placeholder="Describe testcase steps"
                   id="description"
                   value={newDescription}
                   onChange={handleDescriptionChange}
