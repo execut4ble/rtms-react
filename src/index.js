@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Home from "./pages/home.page";
 import Executions from "./pages/executions.page";
@@ -7,10 +7,18 @@ import Features from "./pages/features.page";
 import PageNotFound from "./pages/404.page";
 import FeatureTests from "./pages/testcases.page";
 import ExecuteTests from "./pages/executeTests.page";
+import Login from "./components/login";
+import useToken from "./components/useToken";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
+  const { token, setToken } = useToken();
+
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
+
   return (
     <div>
       <nav id="nav">
@@ -34,6 +42,11 @@ function App() {
             <Link to="/info">
               <i className="fas fa-question-circle"></i> Info
             </Link>
+          </li>
+          <li>
+            <div className="userInfo">
+              <i className="fas fa-user-circle"></i> username{" "}
+            </div>
           </li>
         </ul>
       </nav>

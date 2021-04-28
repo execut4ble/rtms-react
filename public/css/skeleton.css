@@ -1175,3 +1175,15 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
+
+/* ---------------------------------------------------------------------- */
+/* User Info 
+/* ---------------------------------------------------------------------- */
+
+.userInfo {
+  position: absolute !important;
+  display: inline-block;
+  right: 5%;
+  top: 15px;
+  line-height: 2.25em;
+}
