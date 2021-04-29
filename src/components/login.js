@@ -5,18 +5,18 @@ import PropTypes from "prop-types";
 
 async function loginUser(credentials) {
   return apiclient
-    .post("/login", JSON.stringify(credentials))
+    .post("/users/login", credentials)
     .then((response) => response.data);
 }
 
 function Login({ setToken }) {
-  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginUser({
-      username,
+      email,
       password,
     });
     setToken(token);
@@ -36,7 +36,7 @@ function Login({ setToken }) {
                   type="email"
                   placeholder="test@mailbox.com"
                   id="exampleEmailInput"
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 ></input>
               </div>
             </div>
