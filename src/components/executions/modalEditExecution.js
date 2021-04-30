@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function EditExecution({
   execution,
@@ -12,6 +13,7 @@ function EditExecution({
   executionID,
   executionIndex,
 }) {
+  const { token, setToken } = useToken();
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -39,7 +41,6 @@ function EditExecution({
   const [newExecutionName, setNewExecution] = useState(execution.name);
   const [newSlug, setNewSlug] = useState(execution.slug);
   const [newActiveState, setActive] = useState(execution.is_active);
-  const [newAuthor, setNewAuthor] = useState("2");
 
   const editExecution = (event) => {
     event.preventDefault();
@@ -47,15 +48,16 @@ function EditExecution({
       name: newExecutionName,
       slug: newSlug,
       is_active: newActiveState,
-      last_modified_by: newAuthor,
       id: executionID,
     };
 
-    apiclient.put("/runs/" + executionID, executionObject).then((response) => {
-      executionInfo[executionIndex] = response.data;
-      setExecutionInfo([...executionInfo]);
-      console.log(response.data);
-    });
+    apiclient(token)
+      .put("/runs/" + executionID, executionObject)
+      .then((response) => {
+        executionInfo[executionIndex] = response.data;
+        setExecutionInfo([...executionInfo]);
+        console.log(response.data);
+      });
   };
 
   const handleExecutionChange = (event) => {
@@ -69,10 +71,6 @@ function EditExecution({
 
   const handleSlugChange = (event) => {
     setNewSlug(event.target.value);
-  };
-
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value);
   };
 
   return (
@@ -98,17 +96,7 @@ function EditExecution({
             <div id="transition-modal-description">
               <form onSubmit={editExecution}>
                 <div className="row">
-                  <div className="six columns">
-                    <label htmlFor="author">Author</label>
-                    <input
-                      value={newAuthor}
-                      type="text"
-                      id="author"
-                      onChange={handleAuthorChange}
-                      disabled
-                    ></input>
-                  </div>
-                  <div className="six columns">
+                  <div className="full-width">
                     <label htmlFor="slug">Slug</label>
                     <input
                       className="u-full-width"

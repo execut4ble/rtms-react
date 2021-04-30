@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function AddTestcase({ featureID, tests, setTestcases }) {
   const useStyles = makeStyles((theme) => ({
@@ -19,6 +20,7 @@ function AddTestcase({ featureID, tests, setTestcases }) {
     },
   }));
 
+  const { token, setToken } = useToken();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -32,17 +34,18 @@ function AddTestcase({ featureID, tests, setTestcases }) {
 
   const [newTestcaseScenario, setNewTestcase] = useState("new scenario...");
   const [newDescription, setNewDescription] = useState("");
-  const [newAuthor, setNewAuthor] = useState("1");
+  const [newAuthor, setNewAuthor] = useState(
+    sessionStorage.getItem("username")
+  );
 
   const addTestcase = (event) => {
     event.preventDefault();
     const testcaseObject = {
       scenario: newTestcaseScenario,
       description: newDescription,
-      created_by: newAuthor,
     };
 
-    apiclient
+    apiclient(token)
       .post("/testcases/" + featureID + "/", testcaseObject)
       .then((response) => {
         setTestcases(

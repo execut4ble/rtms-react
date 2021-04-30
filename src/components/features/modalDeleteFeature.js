@@ -35,11 +35,13 @@ function DeleteFeature({ featureID }) {
   const deleteFeature = (event) => {
     event.preventDefault();
 
-    apiclient.delete("/features/" + featureID).then((response) => {
-      console.log(response);
+    apiclient()
+      .delete("/features/" + featureID)
+      .then((response) => {
+        console.log(response);
 
-      history.push("/features");
-    });
+        history.push("/features");
+      });
   };
 
   return (

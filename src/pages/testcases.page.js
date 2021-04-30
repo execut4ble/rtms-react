@@ -14,15 +14,19 @@ function FeatureTests(props) {
   const [isEmpty, setEmpty] = useState(false);
 
   useEffect(() => {
-    apiclient.get("/features/" + featureID).then((response) => {
-      setFeatureInfo(response.data);
-    });
+    apiclient()
+      .get("/features/" + featureID)
+      .then((response) => {
+        setFeatureInfo(response.data);
+      });
   }, [featureID]);
 
   useEffect(() => {
-    apiclient.get("/testcases/" + featureID).then((response) => {
-      setTestcases(response.data);
-    });
+    apiclient()
+      .get("/testcases/" + featureID)
+      .then((response) => {
+        setTestcases(response.data);
+      });
     setEmpty(tests.length === 0);
   }, [featureID]);
 

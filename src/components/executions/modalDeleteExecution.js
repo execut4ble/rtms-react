@@ -35,11 +35,13 @@ function DeleteExecution({ executionID }) {
   const deleteExecution = (event) => {
     event.preventDefault();
 
-    apiclient.delete("/runs/" + executionID).then((response) => {
-      console.log(response);
+    apiclient()
+      .delete("/runs/" + executionID)
+      .then((response) => {
+        console.log(response);
 
-      history.push("/executions");
-    });
+        history.push("/executions");
+      });
   };
 
   return (

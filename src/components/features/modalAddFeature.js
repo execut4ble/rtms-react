@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function AddFeature({ features, setFeatures }) {
   const useStyles = makeStyles((theme) => ({
@@ -19,6 +20,7 @@ function AddFeature({ features, setFeatures }) {
     },
   }));
 
+  const { token, setToken } = useToken();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -35,7 +37,9 @@ function AddFeature({ features, setFeatures }) {
   const [newTicket, setNewTicket] = useState("TICKET-ID");
   const [newSprint, setNewSprint] = useState("Sprint");
   const [newSlug, setNewSlug] = useState("slug");
-  const [newAuthor, setNewAuthor] = useState("1");
+  const [newAuthor, setNewAuthor] = useState(
+    sessionStorage.getItem("username")
+  );
 
   const addFeature = (event) => {
     event.preventDefault();
@@ -45,18 +49,19 @@ function AddFeature({ features, setFeatures }) {
       sprint: newSprint,
       description: newDescription,
       slug: newSlug,
-      created_by: newAuthor,
     };
 
-    apiclient.post("/features", featureObject).then((response) => {
-      setFeatures(
-        features.concat({
-          ...response.data,
-          testcases: "0",
-        })
-      );
-      console.log(response);
-    });
+    apiclient(token)
+      .post("/features", featureObject)
+      .then((response) => {
+        setFeatures(
+          features.concat({
+            ...response.data,
+            testcases: "0",
+          })
+        );
+        console.log(response);
+      });
   };
 
   const handleFeatureChange = (event) => {

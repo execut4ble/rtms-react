@@ -13,12 +13,14 @@ function Features() {
   const ref = useRef(page);
 
   const loopFeatures = () => {
-    apiclient.get("/features").then((response) => {
-      const data = response.data;
-      setLoading(false);
-      setEmpty(data.length < 30);
-      setFeatures([...features, ...data]);
-    });
+    apiclient()
+      .get("/features")
+      .then((response) => {
+        const data = response.data;
+        setLoading(false);
+        setEmpty(data.length < 30);
+        setFeatures([...features, ...data]);
+      });
   };
 
   useEffect(() => {

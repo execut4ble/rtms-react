@@ -39,7 +39,7 @@ function DeleteTestcase({
   const deleteTestcase = (event) => {
     event.preventDefault();
 
-    apiclient
+    apiclient()
       .delete("/testcases/" + featureID + "/" + testcaseID)
       .then((response) => {
         tests.splice(testcaseIndex, 1);

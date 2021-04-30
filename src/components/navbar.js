@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiclient from "../apiclient";
+import useToken from "./useToken";
 
-const Navbar = (token) => {
+const Navbar = () => {
   const [user, setUser] = useState([]);
+  const { token } = useToken();
 
-  const config = {
-    headers: { Authorization: `Bearer ${token.token}` },
-  };
-
-  useEffect(async () => {
-    apiclient.get("/users/verify", config).then((response) => {
-      setUser(response.data);
-    });
+  useEffect(() => {
+    apiclient(token)
+      .get("/users/verify")
+      .then((response) => {
+        sessionStorage.setItem("username", response.data.username);
+        setUser(response.data);
+      });
   }, []);
 
   return (

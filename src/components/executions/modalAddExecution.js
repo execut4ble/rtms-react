@@ -5,8 +5,10 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import FeatureListOptions from "../features/featureOptionsList.js";
+import useToken from "../useToken";
 
 function AddExecution({ executions, setExecutions }) {
+  const { token, setToken } = useToken();
   const [features, setFeatures] = useState([]);
   const useStyles = makeStyles((theme) => ({
     modal: {
@@ -26,10 +28,12 @@ function AddExecution({ executions, setExecutions }) {
 
   const handleOpen = () => {
     setOpen(true);
-    apiclient.get("/features").then((response) => {
-      const data = response.data;
-      setFeatures([features, ...data]);
-    });
+    apiclient()
+      .get("/features")
+      .then((response) => {
+        const data = response.data;
+        setFeatures([features, ...data]);
+      });
   };
 
   const handleClose = () => {
@@ -39,7 +43,9 @@ function AddExecution({ executions, setExecutions }) {
   const [newExecutionName, setNewExecution] = useState("a new execution...");
   const [newSlug, setNewSlug] = useState("slug");
   const [newActiveState, setActive] = useState(false);
-  const [newAuthor, setNewAuthor] = useState("1");
+  const [newAuthor, setNewAuthor] = useState(
+    sessionStorage.getItem("username")
+  );
   const [selectedFeatures, setSelectedFeatures] = useState([""]);
 
   const addExecution = (event) => {
@@ -52,19 +58,21 @@ function AddExecution({ executions, setExecutions }) {
       feature: selectedFeatures,
     };
 
-    apiclient.post("/runs", executionObject).then((response) => {
-      setExecutions(
-        executions.concat({
-          ...response.data,
-          name: executionObject.name,
-          testcase_count: response.data.testcase_count,
-          tbd: response.data.testcase_count,
-          passed: "0",
-          failed: "0",
-        })
-      );
-      console.log(response);
-    });
+    apiclient(token)
+      .post("/runs", executionObject)
+      .then((response) => {
+        setExecutions(
+          executions.concat({
+            ...response.data,
+            name: executionObject.name,
+            testcase_count: response.data.testcase_count,
+            tbd: response.data.testcase_count,
+            passed: "0",
+            failed: "0",
+          })
+        );
+        console.log(response);
+      });
   };
 
   const handleExecutionChange = (event) => {

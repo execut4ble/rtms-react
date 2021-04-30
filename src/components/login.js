@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 async function loginUser(credentials) {
-  return apiclient
+  return apiclient()
     .post("/users/login", credentials)
     .then((response) => response.data);
 }

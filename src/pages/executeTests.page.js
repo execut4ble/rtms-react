@@ -11,15 +11,19 @@ function ExecuteTests(props) {
   const [executionInfo, setExecutionInfo] = useState([]);
 
   useEffect(() => {
-    apiclient.get("/runs/" + executionID).then((response) => {
-      setExecutionInfo(response.data);
-    });
+    apiclient()
+      .get("/runs/" + executionID)
+      .then((response) => {
+        setExecutionInfo(response.data);
+      });
   }, [executionID]);
 
   useEffect(() => {
-    apiclient.get("/runtests/" + executionID).then((response) => {
-      setTestcases(response.data);
-    });
+    apiclient()
+      .get("/runtests/" + executionID)
+      .then((response) => {
+        setTestcases(response.data);
+      });
   }, [executionID]);
 
   return (

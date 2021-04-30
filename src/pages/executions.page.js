@@ -15,12 +15,14 @@ function Executions() {
   const ref = useRef(page);
 
   const loopExecutions = () => {
-    apiclient.get("/runs/active").then((response) => {
-      const data = response.data;
-      setLoading(false);
-      setEmpty(data.length < 30);
-      setExecutions([...executions, ...data]);
-    });
+    apiclient()
+      .get("/runs/active")
+      .then((response) => {
+        const data = response.data;
+        setLoading(false);
+        setEmpty(data.length < 30);
+        setExecutions([...executions, ...data]);
+      });
   };
 
   useEffect(() => {
@@ -39,9 +41,11 @@ function Executions() {
     } else {
       setShowInactive("active");
     }
-    apiclient.get("/runs/" + showInactiveState).then((response) => {
-      setExecutions(response.data);
-    });
+    apiclient()
+      .get("/runs/" + showInactiveState)
+      .then((response) => {
+        setExecutions(response.data);
+      });
   };
 
   return (

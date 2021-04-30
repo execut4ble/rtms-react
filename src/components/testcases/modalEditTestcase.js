@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function EditTestcase({
   tests,
@@ -28,6 +29,7 @@ function EditTestcase({
     },
   }));
 
+  const { token, setToken } = useToken();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -41,18 +43,16 @@ function EditTestcase({
 
   const [newTestcaseScenario, setNewTestcase] = useState(testScenario);
   const [newDescription, setNewDescription] = useState(testDescription);
-  const [newAuthor, setNewAuthor] = useState("2");
 
   const editTestcase = (event) => {
     event.preventDefault();
     const testcaseObject = {
       scenario: newTestcaseScenario,
       description: newDescription,
-      last_modified_by: newAuthor,
       id: testcaseID,
     };
 
-    apiclient
+    apiclient(token)
       .put("/testcases/" + featureID + "/" + testcaseID, testcaseObject)
       .then((response) => {
         tests[testcaseIndex] = response.data;
@@ -67,10 +67,6 @@ function EditTestcase({
 
   const handleDescriptionChange = (event) => {
     setNewDescription(event.target.value);
-  };
-
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value);
   };
 
   return (
@@ -113,17 +109,6 @@ function EditTestcase({
                   value={newDescription}
                   onChange={handleDescriptionChange}
                 ></textarea>
-                <div className="row">
-                  <label htmlFor="author">Author</label>
-                  <input
-                    value={newAuthor}
-                    type="text"
-                    id="author"
-                    value={newAuthor}
-                    onChange={handleAuthorChange}
-                    disabled
-                  ></input>
-                </div>
                 <input
                   className="button-primary"
                   type="submit"

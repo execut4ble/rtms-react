@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import apiclient from "../../apiclient";
+import useToken from "../useToken";
 
 const ExecutionTestsTable = ({ test, executionID }) => {
+  const { token, setToken } = useToken();
   const [testcaseStatus, setTestcaseStatus] = useState(test.status);
-  const [newRunner, setRunner] = useState("2");
   const testcaseID = test.testcase_id;
 
   const handleExecute = () => {
@@ -26,10 +27,9 @@ const ExecutionTestsTable = ({ test, executionID }) => {
   };
 
   function updateStatus(statusToSend) {
-    apiclient
+    apiclient(token)
       .put("/runtests/" + executionID + "/" + testcaseID, {
         status: statusToSend,
-        last_executed_by: newRunner,
       })
       .then((response) => {
         console.log(response.data);

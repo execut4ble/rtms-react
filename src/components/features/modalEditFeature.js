@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function EditFeature({
   feature,
@@ -12,6 +13,7 @@ function EditFeature({
   featureID,
   featureIndex,
 }) {
+  const { token, setToken } = useToken();
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -41,7 +43,6 @@ function EditFeature({
   const [newTicket, setNewTicket] = useState(feature.ticket);
   const [newSprint, setNewSprint] = useState(feature.sprint);
   const [newSlug, setNewSlug] = useState(feature.slug);
-  const [newAuthor, setNewAuthor] = useState("2");
 
   const editFeature = (event) => {
     event.preventDefault();
@@ -51,15 +52,16 @@ function EditFeature({
       sprint: newSprint,
       description: newDescription,
       slug: newSlug,
-      last_modified_by: newAuthor,
       id: featureID,
     };
 
-    apiclient.put("/features/" + featureID, featureObject).then((response) => {
-      featureInfo[featureIndex] = response.data;
-      setFeatureInfo([...featureInfo]);
-      console.log(featureInfo);
-    });
+    apiclient(token)
+      .put("/features/" + featureID, featureObject)
+      .then((response) => {
+        featureInfo[featureIndex] = response.data;
+        setFeatureInfo([...featureInfo]);
+        console.log(featureInfo);
+      });
   };
 
   const handleFeatureChange = (event) => {
