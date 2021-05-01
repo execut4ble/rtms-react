@@ -4,7 +4,7 @@ import apiclient from "../apiclient";
 import useToken from "./useToken";
 import { Menu, MenuItem, Fade } from "@material-ui/core";
 
-const Navbar = ({ setLoggedIn }) => {
+const Navbar = () => {
   const [user, setUser] = useState([]);
   const { token } = useToken();
 
@@ -31,7 +31,7 @@ const Navbar = ({ setLoggedIn }) => {
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("username");
-    setLoggedIn(false);
+    window.location.reload();
   };
 
   return (

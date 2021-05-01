@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./pages/home.page";
 import Executions from "./pages/executions.page";
@@ -15,15 +15,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const { token, setToken } = useToken();
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
-  // Use !token or !isLoggedin?
   return (
     <div>
-      {!isLoggedIn && <Login setToken={setToken} setLoggedIn={setLoggedIn} />}
-      {token && isLoggedIn && (
+      {!token && <Login setToken={setToken} />}
+      {token && (
         <div>
-          <Navbar token={token} setLoggedIn={setLoggedIn} />
+          <Navbar token={token} />
           <Switch>
             <Route exact path="/features" component={Features} />
             <Route exact path="/features/:id" component={FeatureTests} />

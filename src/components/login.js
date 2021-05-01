@@ -8,7 +8,7 @@ async function loginUser(credentials) {
     .then((response) => response.data);
 }
 
-function Login({ setToken, setLoggedIn, isLoggedIn }) {
+function Login({ setToken }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -19,7 +19,6 @@ function Login({ setToken, setLoggedIn, isLoggedIn }) {
       password,
     });
     setToken(token);
-    setLoggedIn(true);
   };
 
   return (
