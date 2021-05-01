@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import apiclient from "../apiclient";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 async function loginUser(credentials) {
@@ -9,7 +8,7 @@ async function loginUser(credentials) {
     .then((response) => response.data);
 }
 
-function Login({ setToken }) {
+function Login({ setToken, setLoggedIn, isLoggedIn }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -20,6 +19,7 @@ function Login({ setToken }) {
       password,
     });
     setToken(token);
+    setLoggedIn(true);
   };
 
   return (

@@ -3,8 +3,10 @@ import apiclient from "../apiclient";
 import FeatureList from "../components/features/featureList";
 import LoadingSpinner from "../components/loadingSpinner";
 import AddFeature from "../components/features/modalAddFeature";
+import useToken from "../components/useToken";
 
 function Features() {
+  const { token } = useToken();
   const [features, setFeatures] = useState([]);
   const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ function Features() {
   const ref = useRef(page);
 
   const loopFeatures = () => {
-    apiclient()
+    apiclient(token)
       .get("/features")
       .then((response) => {
         const data = response.data;

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiclient from "../apiclient";
 import useToken from "./useToken";
+import { Menu, MenuItem, Fade } from "@material-ui/core";
 
-const Navbar = () => {
+const Navbar = ({ setLoggedIn }) => {
   const [user, setUser] = useState([]);
   const { token } = useToken();
 
@@ -15,6 +16,23 @@ const Navbar = () => {
         setUser(response.data);
       });
   }, []);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("username");
+    setLoggedIn(false);
+  };
 
   return (
     <div>
@@ -42,7 +60,29 @@ const Navbar = () => {
           </li>
           <li>
             <div className="userInfo">
-              <i className="fas fa-user-circle"></i> {user.username}{" "}
+              <button className="crud" onClick={handleClick}>
+                <i className="fas fa-user-circle"></i> {user.username}{" "}
+              </button>
+              <Menu
+                id="fade-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+                getContentAnchorEl={null}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+              >
+                <MenuItem onClick={handleClose}>Preferences</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
             </div>
           </li>
         </ul>

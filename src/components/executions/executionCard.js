@@ -2,14 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ExecutionList = ({ execution }) => {
-  function count(object) {
-    if (count === null) {
-      return "-";
-    } else {
-      return object;
-    }
-  }
-
   return (
     <div>
       <Link to={`/executions/${execution.id}`}>

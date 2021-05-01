@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function DeleteTestcase({
   featureID,
@@ -27,6 +28,7 @@ function DeleteTestcase({
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { token } = useToken();
 
   const handleOpen = () => {
     setOpen(true);
@@ -39,7 +41,7 @@ function DeleteTestcase({
   const deleteTestcase = (event) => {
     event.preventDefault();
 
-    apiclient()
+    apiclient(token)
       .delete("/testcases/" + featureID + "/" + testcaseID)
       .then((response) => {
         tests.splice(testcaseIndex, 1);

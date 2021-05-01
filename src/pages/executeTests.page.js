@@ -4,14 +4,16 @@ import ExecutionTestsTable from "../components/executions/executionTestsTable";
 import ExecutionInfo from "../components/executions/executionInfo";
 import EditExecution from "../components/executions/modalEditExecution";
 import DeleteExecution from "../components/executions/modalDeleteExecution";
+import useToken from "../components/useToken";
 
 function ExecuteTests(props) {
+  const { token } = useToken();
   const executionID = props.match.params.id;
   const [tests, setTestcases] = useState([]);
   const [executionInfo, setExecutionInfo] = useState([]);
 
   useEffect(() => {
-    apiclient()
+    apiclient(token)
       .get("/runs/" + executionID)
       .then((response) => {
         setExecutionInfo(response.data);
@@ -19,7 +21,7 @@ function ExecuteTests(props) {
   }, [executionID]);
 
   useEffect(() => {
-    apiclient()
+    apiclient(token)
       .get("/runtests/" + executionID)
       .then((response) => {
         setTestcases(response.data);

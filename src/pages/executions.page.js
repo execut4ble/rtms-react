@@ -4,8 +4,10 @@ import ExecutionCard from "../components/executions/executionCard";
 import ExecutionChart from "../components/executions/executionChart";
 import LoadingSpinner from "../components/loadingSpinner";
 import AddExecution from "../components/executions/modalAddExecution";
+import useToken from "../components/useToken";
 
 function Executions() {
+  const { token } = useToken();
   const [executions, setExecutions] = useState([]);
   const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ function Executions() {
   const ref = useRef(page);
 
   const loopExecutions = () => {
-    apiclient()
+    apiclient(token)
       .get("/runs/active")
       .then((response) => {
         const data = response.data;
@@ -41,7 +43,7 @@ function Executions() {
     } else {
       setShowInactive("active");
     }
-    apiclient()
+    apiclient(token)
       .get("/runs/" + showInactiveState)
       .then((response) => {
         setExecutions(response.data);

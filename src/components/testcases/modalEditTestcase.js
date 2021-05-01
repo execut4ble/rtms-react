@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -14,7 +14,6 @@ function EditTestcase({
   setTestcases,
   featureID,
   testcaseIndex,
-  lastExecutionDate,
 }) {
   const useStyles = makeStyles((theme) => ({
     modal: {
@@ -29,7 +28,7 @@ function EditTestcase({
     },
   }));
 
-  const { token, setToken } = useToken();
+  const { token } = useToken();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

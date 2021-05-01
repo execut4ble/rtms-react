@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import apiclient from "../../apiclient";
 import useToken from "../useToken";
 
 const ExecutionTestsTable = ({ test, executionID }) => {
-  const { token, setToken } = useToken();
+  const { token } = useToken();
   const [testcaseStatus, setTestcaseStatus] = useState(test.status);
   const testcaseID = test.testcase_id;
 
@@ -34,18 +34,6 @@ const ExecutionTestsTable = ({ test, executionID }) => {
       .then((response) => {
         console.log(response.data);
       });
-  }
-
-  function formatDate(unixTimeStamp) {
-    var date = new Date(unixTimeStamp * 1000);
-
-    var dateString = date.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-
-    return dateString;
   }
 
   return (

@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import useToken from "../useToken";
 
 function DeleteExecution({ executionID }) {
   const history = useHistory();
+  const { token } = useToken();
   const useStyles = makeStyles((theme) => ({
     modal: {
       display: "flex",
@@ -35,7 +37,7 @@ function DeleteExecution({ executionID }) {
   const deleteExecution = (event) => {
     event.preventDefault();
 
-    apiclient()
+    apiclient(token)
       .delete("/runs/" + executionID)
       .then((response) => {
         console.log(response);

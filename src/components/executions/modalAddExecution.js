@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import apiclient from "../../apiclient";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -8,7 +8,7 @@ import FeatureListOptions from "../features/featureOptionsList.js";
 import useToken from "../useToken";
 
 function AddExecution({ executions, setExecutions }) {
-  const { token, setToken } = useToken();
+  const { token } = useToken();
   const [features, setFeatures] = useState([]);
   const useStyles = makeStyles((theme) => ({
     modal: {
@@ -28,7 +28,7 @@ function AddExecution({ executions, setExecutions }) {
 
   const handleOpen = () => {
     setOpen(true);
-    apiclient()
+    apiclient(token)
       .get("/features")
       .then((response) => {
         const data = response.data;

@@ -6,15 +6,17 @@ import AddTestsCTA from "../components/features/AddTestsCTA";
 import EditFeature from "../components/features/modalEditFeature";
 import DeleteFeature from "../components/features/modalDeleteFeature";
 import AddTestcase from "../components/testcases/modalAddTestcase";
+import useToken from "../components/useToken";
 
 function FeatureTests(props) {
   const featureID = props.match.params.id;
   const [tests, setTestcases] = useState([]);
   const [featureInfo, setFeatureInfo] = useState([]);
   const [isEmpty, setEmpty] = useState(false);
+  const { token } = useToken();
 
   useEffect(() => {
-    apiclient()
+    apiclient(token)
       .get("/features/" + featureID)
       .then((response) => {
         setFeatureInfo(response.data);
@@ -22,7 +24,7 @@ function FeatureTests(props) {
   }, [featureID]);
 
   useEffect(() => {
-    apiclient()
+    apiclient(token)
       .get("/testcases/" + featureID)
       .then((response) => {
         setTestcases(response.data);

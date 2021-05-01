@@ -1,16 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
 
 const ExecutionList = ({ execution }) => {
-  function count(object) {
-    if (count === null) {
-      return "-";
-    } else {
-      return object;
-    }
-  }
-
   const chartData = [
     { title: "passed", value: parseInt(execution.passed), color: "#2cb14a" },
     { title: "failed", value: parseInt(execution.failed), color: "#C13C37" },
