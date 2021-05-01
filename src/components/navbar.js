@@ -54,6 +54,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/defects">
+              <i className="fas fa-bug"></i> Defects
+            </Link>
+          </li>
+          <li>
             <Link to="/info">
               <i className="fas fa-question-circle"></i> Info
             </Link>

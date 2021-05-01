@@ -485,6 +485,14 @@ input[type="button"].button-primary:focus {
   background-color: #c13c37;
 }
 
+.execute.false {
+  background-color: #c13c37;
+}
+
+.execute.true {
+  background-color: #2cb14a;
+}
+
 .button.button-delete,
 button.button-delete,
 input[type="submit"].button-primary,
