@@ -58,6 +58,8 @@ function EditTestcase({
         setTestcases([...tests]);
         console.log(tests[testcaseIndex]);
       });
+
+    handleClose();
   };
 
   const handleTestcaseChange = (event) => {
@@ -98,6 +100,7 @@ function EditTestcase({
                     id="testcaseScenario"
                     value={newTestcaseScenario}
                     onChange={handleTestcaseChange}
+                    required
                   ></input>
                 </div>
                 <label htmlFor="description">Description</label>
@@ -112,7 +115,6 @@ function EditTestcase({
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>

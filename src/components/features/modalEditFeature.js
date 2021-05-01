@@ -62,6 +62,8 @@ function EditFeature({
         setFeatureInfo([...featureInfo]);
         console.log(featureInfo);
       });
+
+    handleClose();
   };
 
   const handleFeatureChange = (event) => {
@@ -115,6 +117,7 @@ function EditFeature({
                       id="ticket"
                       value={newTicket}
                       onChange={handleTicketChange}
+                      required
                     ></input>
                   </div>
                   <div className="four columns">
@@ -126,6 +129,7 @@ function EditFeature({
                       id="sprint"
                       value={newSprint}
                       onChange={handleSprintChange}
+                      required
                     ></input>
                   </div>
                   <div className="four columns">
@@ -136,6 +140,7 @@ function EditFeature({
                       id="slug"
                       value={newSlug}
                       onChange={handleSlugChange}
+                      required
                     ></input>
                   </div>
                 </div>
@@ -147,6 +152,7 @@ function EditFeature({
                     id="featureTitle"
                     value={newFeatureName}
                     onChange={handleFeatureChange}
+                    required
                   ></input>
                 </div>
                 <label htmlFor="description">Description</label>
@@ -161,7 +167,6 @@ function EditFeature({
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>

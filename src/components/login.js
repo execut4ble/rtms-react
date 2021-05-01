@@ -36,6 +36,7 @@ function Login({ setToken }) {
                   placeholder="test@mailbox.com"
                   id="exampleEmailInput"
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 ></input>
               </div>
             </div>
@@ -48,6 +49,7 @@ function Login({ setToken }) {
                   placeholder=""
                   id="password"
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 ></input>
               </div>
             </div>

@@ -56,6 +56,8 @@ function AddTestcase({ featureID, tests, setTestcases }) {
         );
         console.log(response);
       });
+
+    handleClose();
   };
 
   const handleTestcaseChange = (event) => {
@@ -99,6 +101,7 @@ function AddTestcase({ featureID, tests, setTestcases }) {
                     type="text"
                     id="testcaseScenario"
                     onChange={handleTestcaseChange}
+                    required
                   ></input>
                 </div>
                 <label htmlFor="description">Description</label>
@@ -122,7 +125,6 @@ function AddTestcase({ featureID, tests, setTestcases }) {
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>

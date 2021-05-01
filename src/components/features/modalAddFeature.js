@@ -36,7 +36,7 @@ function AddFeature({ features, setFeatures }) {
   const [newDescription, setNewDescription] = useState("");
   const [newTicket, setNewTicket] = useState("TICKET-ID");
   const [newSprint, setNewSprint] = useState("Sprint");
-  const [newSlug, setNewSlug] = useState("slug");
+  const [newSlug, setNewSlug] = useState("");
   const [newAuthor, setNewAuthor] = useState(
     sessionStorage.getItem("username")
   );
@@ -62,6 +62,8 @@ function AddFeature({ features, setFeatures }) {
         );
         console.log(response);
       });
+
+    handleClose();
   };
 
   const handleFeatureChange = (event) => {
@@ -118,6 +120,7 @@ function AddFeature({ features, setFeatures }) {
                       type="text"
                       id="ticket"
                       onChange={handleTicketChange}
+                      required
                     ></input>
                   </div>
                   <div className="four columns">
@@ -128,6 +131,7 @@ function AddFeature({ features, setFeatures }) {
                       placeholder="i.e. Sprint 4"
                       id="sprint"
                       onChange={handleSprintChange}
+                      required
                     ></input>
                   </div>
                   <div className="four columns">
@@ -137,6 +141,7 @@ function AddFeature({ features, setFeatures }) {
                       type="text"
                       id="slug"
                       onChange={handleSlugChange}
+                      required
                     ></input>
                   </div>
                 </div>
@@ -147,6 +152,7 @@ function AddFeature({ features, setFeatures }) {
                     type="text"
                     id="featureTitle"
                     onChange={handleFeatureChange}
+                    required
                   ></input>
                 </div>
                 <label htmlFor="description">Description</label>
@@ -170,7 +176,6 @@ function AddFeature({ features, setFeatures }) {
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>

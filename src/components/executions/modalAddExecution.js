@@ -73,6 +73,7 @@ function AddExecution({ executions, setExecutions }) {
         );
         console.log(response);
       });
+    handleClose();
   };
 
   const handleExecutionChange = (event) => {
@@ -209,7 +210,6 @@ function AddExecution({ executions, setExecutions }) {
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>

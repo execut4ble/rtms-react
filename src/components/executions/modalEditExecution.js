@@ -58,6 +58,8 @@ function EditExecution({
         setExecutionInfo([...executionInfo]);
         console.log(response.data);
       });
+
+    handleClose();
   };
 
   const handleExecutionChange = (event) => {
@@ -132,7 +134,6 @@ function EditExecution({
                   className="button-primary"
                   type="submit"
                   value="Submit"
-                  onClick={handleClose}
                 ></input>
               </form>
             </div>
