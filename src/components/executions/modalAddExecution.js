@@ -147,6 +147,7 @@ function AddExecution({ executions, setExecutions }) {
                       type="text"
                       id="slug"
                       onChange={handleSlugChange}
+                      required
                     ></input>
                   </div>
                 </div>
@@ -157,6 +158,7 @@ function AddExecution({ executions, setExecutions }) {
                     type="text"
                     id="executionTitle"
                     onChange={handleExecutionChange}
+                    required
                   ></input>
                 </div>
                 <div className="row">
@@ -167,6 +169,7 @@ function AddExecution({ executions, setExecutions }) {
                         className="u-full-width"
                         id="featureSelect"
                         onChange={(e) => handleSelectFeature(e, i)}
+                        required
                       >
                         {features.map((feature, index) => (
                           <FeatureListOptions key={index} feature={feature} />
