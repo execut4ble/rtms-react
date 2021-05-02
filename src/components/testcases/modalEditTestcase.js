@@ -71,7 +71,7 @@ function EditTestcase({
   };
 
   return (
-    <div className="six columns">
+    <div>
       <button className="crud" type="button" onClick={handleOpen}>
         <i className="fas fa-pencil-alt"></i>
       </button>

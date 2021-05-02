@@ -38,7 +38,7 @@ function DefectDetails(props) {
                 <DefectInfo key={i} defect={defect} defectID={defectID} />
               ))}
               <div className="row">
-                <div className="two columns">
+                <div className="three columns">
                   {defectInfo.map((defect, i) => (
                     <EditDefect
                       key={i}
@@ -51,7 +51,7 @@ function DefectDetails(props) {
                     />
                   ))}
                 </div>
-                <div className="two columns">
+                <div className="three columns">
                   <DeleteDefect defectID={defectID} />
                 </div>
               </div>

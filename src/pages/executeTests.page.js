@@ -38,7 +38,7 @@ function ExecuteTests(props) {
                 <ExecutionInfo key={i} execution={execution} />
               ))}
               <div className="row">
-                <div className="two columns">
+                <div className="three columns">
                   {executionInfo.map((execution, i) => (
                     <EditExecution
                       key={i}
@@ -50,7 +50,7 @@ function ExecuteTests(props) {
                     />
                   ))}
                 </div>
-                <div className="two columns">
+                <div className="three columns">
                   <DeleteExecution executionID={executionID} />
                 </div>
               </div>

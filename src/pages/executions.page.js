@@ -11,14 +11,13 @@ function Executions() {
   const [executions, setExecutions] = useState([]);
   const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [showInactiveState, setShowInactive] = useState("");
 
   const page = 2;
   const ref = useRef(page);
 
   const loopExecutions = () => {
     apiclient(token)
-      .get("/runs/active")
+      .get("/runs/")
       .then((response) => {
         const data = response.data;
         setLoading(false);
@@ -37,14 +36,9 @@ function Executions() {
     ref.current += 1;
   };
 
-  const handleShowInactive = (event) => {
-    if (!event.target.checked) {
-      setShowInactive("");
-    } else {
-      setShowInactive("active");
-    }
+  const handleSelectDisplay = (event) => {
     apiclient(token)
-      .get("/runs/" + showInactiveState)
+      .get("/runs/" + event.target.value)
       .then((response) => {
         setExecutions(response.data);
       });
@@ -55,15 +49,15 @@ function Executions() {
       <div className="container">
         <p className="feed-description"></p>
         <h3 className="section-heading">Test Executions</h3>
-        <input
-          type="checkbox"
-          checked={showInactiveState}
-          id="showInactive"
-          onChange={handleShowInactive}
-        ></input>
-        <label htmlFor="isActive" className="activeChkBox">
-          Show inactive
-        </label>
+        <select
+          className="u-full-width"
+          id="executionsFilter"
+          onChange={(e) => handleSelectDisplay(e)}
+        >
+          <option value="">Show all executions</option>
+          <option value="active">Show only active executions</option>
+          <option value="inactive">Show only inactive executions</option>
+        </select>
         <AddExecution executions={executions} setExecutions={setExecutions} />
         {isLoading && executions.length === 0 && <LoadingSpinner />}
         {executions.map((execution, i) => (

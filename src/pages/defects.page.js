@@ -16,7 +16,7 @@ function Defects() {
 
   const loopDefects = () => {
     apiclient(token)
-      .get("/defects")
+      .get("/defects/")
       .then((response) => {
         const data = response.data;
         setLoading(false);
@@ -35,6 +35,14 @@ function Defects() {
     ref.current += 1;
   };
 
+  const handleSelectDisplay = (event) => {
+    apiclient(token)
+      .get("/defects/" + event.target.value)
+      .then((response) => {
+        setDefects(response.data);
+      });
+  };
+
   return (
     <div className="section defects" id="feed">
       <div className="container">
@@ -42,6 +50,15 @@ function Defects() {
         <div className="row">
           <div className="twelve columns">
             <h3 className="section-heading">Defects</h3>
+            <select
+              className="u-full-width"
+              id="defectFilter"
+              onChange={(e) => handleSelectDisplay(e)}
+            >
+              <option value="">Show all defects</option>
+              <option value="open">Show only open defects</option>
+              <option value="closed">Show only closed defects</option>
+            </select>
             <AddDefect defects={defects} setDefects={setDefects} />
             {isLoading && defects.length === 0 && <LoadingSpinner />}
             {(!isLoading || defects.length > 0) && (

@@ -25,17 +25,18 @@ const Testcases = ({ test, tests, setTestcases, testcaseIndex }) => {
       <td>{test.scenario}</td>
       <td>{formatDate(test.last_execution_date)}</td>
       <td>
-        <EditTestcase
-          tests={tests}
-          testcaseIndex={testcaseIndex}
-          testcaseID={test.id}
-          testScenario={test.scenario}
-          testDescription={test.description}
-          setTestcases={setTestcases}
-          featureID={test.feature}
-          lastExecutionDate={test.last_execution_date}
-        />
-
+        <div className="six columns">
+          <EditTestcase
+            tests={tests}
+            testcaseIndex={testcaseIndex}
+            testcaseID={test.id}
+            testScenario={test.scenario}
+            testDescription={test.description}
+            setTestcases={setTestcases}
+            featureID={test.feature}
+            lastExecutionDate={test.last_execution_date}
+          />
+        </div>
         <DeleteTestcase
           featureID={test.feature}
           testcaseID={test.id}

@@ -42,14 +42,14 @@ function FeatureTests(props) {
                 <FeatureInfo key={i} feature={feature} />
               ))}
               <div className="row">
-                <div className="two columns">
+                <div className="three columns">
                   <AddTestcase
                     featureID={featureID}
                     setTestcases={setTestcases}
                     tests={tests}
                   />
                 </div>
-                <div className="two columns">
+                <div className="three columns">
                   {/* sikari told me to add this loop i add yes */}
                   {featureInfo.map((feature, i) => (
                     <EditFeature
@@ -62,7 +62,7 @@ function FeatureTests(props) {
                     />
                   ))}
                 </div>
-                <div className="two columns">
+                <div className="three columns">
                   <DeleteFeature featureID={featureID} />
                 </div>
               </div>

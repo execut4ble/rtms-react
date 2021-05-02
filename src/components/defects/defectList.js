@@ -10,6 +10,10 @@ const DefectList = ({ defect }) => {
     }
   }
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <tr>
       <td>
@@ -19,7 +23,7 @@ const DefectList = ({ defect }) => {
       <td>
         <Link to={`/defects/${defect.id}`}>{defect.name}</Link>
       </td>
-      <td>{defect.priority}</td>
+      <td>{capitalizeFirstLetter(defect.priority)}</td>
       <td>{isOpen(defect.is_active)}</td>
     </tr>
   );
