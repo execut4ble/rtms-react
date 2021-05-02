@@ -5,6 +5,7 @@ import ExecutionInfo from "../components/executions/executionInfo";
 import EditExecution from "../components/executions/modalEditExecution";
 import DeleteExecution from "../components/executions/modalDeleteExecution";
 import useToken from "../components/useToken";
+import WatchButton from "../components/executions/watchButton";
 
 function ExecuteTests(props) {
   const { token } = useToken();
@@ -52,6 +53,15 @@ function ExecuteTests(props) {
                 </div>
                 <div className="three columns">
                   <DeleteExecution executionID={executionID} />
+                </div>
+                <div className="three columns">
+                  {executionInfo.map((execution, i) => (
+                    <WatchButton
+                      key={i}
+                      execution={execution}
+                      executionID={executionID}
+                    />
+                  ))}
                 </div>
               </div>
 

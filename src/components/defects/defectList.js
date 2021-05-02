@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const DefectList = ({ defect }) => {
+const DefectList = ({ defect, dashboard }) => {
   function isOpen(object) {
     if (object) {
       return "Open";
@@ -16,15 +16,17 @@ const DefectList = ({ defect }) => {
 
   return (
     <tr>
-      <td>
-        <Link to={`/features/${defect.feature}`}>{defect.feature_name}</Link>
-      </td>
+      {!dashboard && (
+        <td>
+          <Link to={`/features/${defect.feature}`}>{defect.feature_name}</Link>
+        </td>
+      )}
       <td>{defect.ticket}</td>
       <td>
         <Link to={`/defects/${defect.id}`}>{defect.name}</Link>
       </td>
       <td>{capitalizeFirstLetter(defect.priority)}</td>
-      <td>{isOpen(defect.is_active)}</td>
+      {!dashboard && <td>{isOpen(defect.is_active)}</td>}
     </tr>
   );
 };

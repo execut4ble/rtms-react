@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ExecutionList = ({ execution }) => {
+const ExecutionList = ({ execution, dashboard }) => {
   return (
     <div>
       <Link to={`/executions/${execution.id}`}>
-        <h5>{execution.name}</h5>
+        {!dashboard ? <h5>{execution.name}</h5> : <p>{execution.name}</p>}
       </Link>
       <p>{execution.testcase_count} test cases</p>
     </div>

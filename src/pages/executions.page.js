@@ -5,6 +5,7 @@ import ExecutionChart from "../components/executions/executionChart";
 import LoadingSpinner from "../components/loadingSpinner";
 import AddExecution from "../components/executions/modalAddExecution";
 import useToken from "../components/useToken";
+import ChartStatuses from "../components/executions/chartStatuses";
 
 function Executions() {
   const { token } = useToken();
@@ -62,13 +63,16 @@ function Executions() {
         {isLoading && executions.length === 0 && <LoadingSpinner />}
         {executions.map((execution, i) => (
           <div className="row" key={i}>
-            <div className="one-half column">
+            <div className="one-half column statuses">
               {(!isLoading || executions.length > 0) && (
                 <ExecutionCard execution={execution} />
               )}
             </div>
             <div className="one-half column">
-              <ExecutionChart execution={execution} />
+              <div className="row">
+                <ExecutionChart execution={execution} />
+                <ChartStatuses execution={execution} />
+              </div>
             </div>
           </div>
         ))}
