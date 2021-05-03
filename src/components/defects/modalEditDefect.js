@@ -46,6 +46,7 @@ function EditDefect({
   const [newPriority, setNewPriority] = useState(defect.priority);
   const [selectedFeature, setSelectedFeature] = useState(defect.feature);
   const [newActiveState] = useState(defect.is_active);
+  const [newAuthor] = useState(sessionStorage.getItem("username"));
 
   const editDefect = (event) => {
     event.preventDefault();
@@ -63,7 +64,13 @@ function EditDefect({
       .put("/defects/" + defectID, defectObject)
       .then((response) => {
         defectInfo[defectIndex] = response.data;
-        setDefectInfo([...defectInfo]);
+        setDefectInfo([
+          {
+            ...defectInfo[defectIndex],
+            modified_user: newAuthor,
+            created_user: defect.created_user,
+          },
+        ]);
         console.log(defectInfo);
       });
 

@@ -43,6 +43,7 @@ function EditFeature({
   const [newTicket, setNewTicket] = useState(feature.ticket);
   const [newSprint, setNewSprint] = useState(feature.sprint);
   const [newSlug, setNewSlug] = useState(feature.slug);
+  const [newAuthor] = useState(sessionStorage.getItem("username"));
 
   const editFeature = (event) => {
     event.preventDefault();
@@ -59,8 +60,16 @@ function EditFeature({
       .put("/features/" + featureID, featureObject)
       .then((response) => {
         featureInfo[featureIndex] = response.data;
-        setFeatureInfo([...featureInfo]);
-        console.log(featureInfo);
+        setFeatureInfo([
+          {
+            ...featureInfo[featureIndex],
+            modified_user: newAuthor,
+            created_user: feature.created_user,
+          },
+        ]);
+        console.log([
+          { ...featureInfo[featureIndex], modified_user: newAuthor },
+        ]);
       });
 
     handleClose();

@@ -41,6 +41,7 @@ function EditExecution({
   const [newExecutionName, setNewExecution] = useState(execution.name);
   const [newSlug, setNewSlug] = useState(execution.slug);
   const [newActiveState, setActive] = useState(execution.is_active);
+  const [newAuthor] = useState(sessionStorage.getItem("username"));
 
   const editExecution = (event) => {
     event.preventDefault();
@@ -55,7 +56,13 @@ function EditExecution({
       .put("/runs/" + executionID, executionObject)
       .then((response) => {
         executionInfo[executionIndex] = response.data;
-        setExecutionInfo([...executionInfo]);
+        setExecutionInfo([
+          {
+            ...executionInfo[executionIndex],
+            modified_user: newAuthor,
+            created_user: execution.created_user,
+          },
+        ]);
         console.log(response.data);
       });
 
