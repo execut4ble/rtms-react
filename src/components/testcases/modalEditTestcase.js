@@ -14,6 +14,7 @@ function EditTestcase({
   setTestcases,
   featureID,
   testcaseIndex,
+  lastExecutionDate,
 }) {
   const useStyles = makeStyles((theme) => ({
     modal: {
@@ -54,7 +55,10 @@ function EditTestcase({
     apiclient(token)
       .put("/testcases/" + featureID + "/" + testcaseID, testcaseObject)
       .then((response) => {
-        tests[testcaseIndex] = response.data;
+        tests[testcaseIndex] = {
+          ...response.data,
+          last_execution_date: lastExecutionDate,
+        };
         // TODO: Add last execution date
         setTestcases([...tests]);
         console.log(tests[testcaseIndex]);
