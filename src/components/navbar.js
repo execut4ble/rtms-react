@@ -58,11 +58,11 @@ const Navbar = () => {
               <i className="fas fa-bug"></i> Defects
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/info">
               <i className="fas fa-question-circle"></i> Info
             </Link>
-          </li>
+          </li> */}
           <li>
             <div className="userInfo">
               <button className="crud" onClick={handleClick}>

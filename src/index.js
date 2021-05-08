@@ -31,7 +31,7 @@ function App() {
             <Route exact path="/executions/:id" component={ExecuteTests} />
             <Route exact path="/defects" component={Defects} />
             <Route exact path="/defects/:id" component={DefectDetails} />
-            <Route exact path="/info" component={Info} />
+            {/* <Route exact path="/info" component={Info} /> */}
             <Route exact path="/" component={Home} />
             <Route render={() => <PageNotFound />} />
           </Switch>
