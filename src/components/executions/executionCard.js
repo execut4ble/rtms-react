@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ExecutionList = ({ execution, dashboard }) => {
   return (
-    <div>
+    <div id="execution">
       <Link to={`/executions/${execution.id}`}>
         {!dashboard ? <h5>{execution.name}</h5> : <p>{execution.name}</p>}
       </Link>

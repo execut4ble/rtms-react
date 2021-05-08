@@ -48,7 +48,7 @@ function DeleteDefect({ defectID }) {
 
   return (
     <div>
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button className="crud" type="button" id="delete" onClick={handleOpen}>
         <i className="fas fa-trash-alt"></i> Remove defect
       </button>
       <Modal

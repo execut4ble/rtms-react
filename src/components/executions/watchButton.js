@@ -31,7 +31,7 @@ function WatchButton({ execution, executionID }) {
   if (!watchState) {
     return (
       <div>
-        <button className="crud" type="button" onClick={handleWatch}>
+        <button className="crud" type="button" id="watch" onClick={handleWatch}>
           <i className="fas fa-eye"></i> Watch
         </button>
       </div>
@@ -39,7 +39,12 @@ function WatchButton({ execution, executionID }) {
   } else {
     return (
       <div>
-        <button className="crud" type="button" onClick={handleUnwatch}>
+        <button
+          className="crud"
+          type="button"
+          id="unwatch"
+          onClick={handleUnwatch}
+        >
           <i className="fas fa-eye-slash"></i> Unwatch
         </button>
       </div>

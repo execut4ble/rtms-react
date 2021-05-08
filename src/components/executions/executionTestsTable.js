@@ -38,11 +38,11 @@ const ExecutionTestsTable = ({ test, executionID }) => {
 
   return (
     <tr>
-      <td>
+      <td id="feature">
         <Link to={`/features/${test.feature}`}>{test.feature_name}</Link>
       </td>
-      <td>{test.scenario}</td>
-      <td style={{ textTransform: "uppercase" }}>
+      <td id="scenario">{test.scenario}</td>
+      <td id="status" style={{ textTransform: "uppercase" }}>
         <button className={`execute ${testcaseStatus}`} onClick={handleExecute}>
           {testcaseStatus}
         </button>

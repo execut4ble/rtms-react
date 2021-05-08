@@ -97,7 +97,7 @@ function EditFeature({
 
   return (
     <div>
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button className="crud" type="button" id="edit" onClick={handleOpen}>
         <i className="fas fa-pencil-alt"></i> Edit feature
       </button>
       <Modal

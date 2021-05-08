@@ -74,7 +74,7 @@ function AddTestcase({ featureID, tests, setTestcases }) {
 
   return (
     <div>
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button className="crud" id="create" type="button" onClick={handleOpen}>
         <i className="fas fa-plus"></i> Add testcase
       </button>
       <Modal

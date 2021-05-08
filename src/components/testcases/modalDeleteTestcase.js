@@ -51,7 +51,12 @@ function DeleteTestcase({
 
   return (
     <div className="six columns">
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button
+        className="crud"
+        type="button"
+        id="deleteTestcase"
+        onClick={handleOpen}
+      >
         <i className="fas fa-trash-alt"></i>
       </button>
       <Modal

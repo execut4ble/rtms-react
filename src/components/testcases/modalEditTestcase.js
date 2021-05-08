@@ -77,7 +77,12 @@ function EditTestcase({
 
   return (
     <div>
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button
+        className="crud"
+        type="button"
+        id="editTestcase"
+        onClick={handleOpen}
+      >
         <i className="fas fa-pencil-alt"></i>
       </button>
       <Modal

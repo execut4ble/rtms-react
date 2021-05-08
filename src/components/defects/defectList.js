@@ -17,15 +17,15 @@ const DefectList = ({ defect, dashboard }) => {
   return (
     <tr>
       {!dashboard && (
-        <td>
+        <td id="featureName">
           <Link to={`/features/${defect.feature}`}>{defect.feature_name}</Link>
         </td>
       )}
-      <td>{defect.ticket}</td>
-      <td>
+      <td id="ticket">{defect.ticket}</td>
+      <td id="title">
         <Link to={`/defects/${defect.id}`}>{defect.name}</Link>
       </td>
-      <td>{capitalizeFirstLetter(defect.priority)}</td>
+      <td id="priority">{capitalizeFirstLetter(defect.priority)}</td>
       {!dashboard && <td>{isOpen(defect.is_active)}</td>}
     </tr>
   );

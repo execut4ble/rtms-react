@@ -12,13 +12,13 @@ const FeatureList = ({ feature }) => {
 
   return (
     <tr>
-      <td>{feature.ticket}</td>
-      <td>{feature.sprint}</td>
-      <td>
+      <td id="ticket">{feature.ticket}</td>
+      <td id="sprint">{feature.sprint}</td>
+      <td id="title">
         <Link to={`/features/${feature.id}`}>{feature.name}</Link>
       </td>
-      <td>{count(feature.testcases)}</td>
-      <td>{count(feature.defects)}</td>
+      <td id="testcaseCount">{count(feature.testcases)}</td>
+      <td id="defectCount">{count(feature.defects)}</td>
     </tr>
   );
 };

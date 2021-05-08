@@ -109,7 +109,7 @@ function AddExecution({ executions, setExecutions }) {
 
   return (
     <div>
-      <button className="crud" type="button" onClick={handleOpen}>
+      <button className="crud" type="button" id="create" onClick={handleOpen}>
         <i className="fas fa-plus"></i> New test execution
       </button>
       <Modal

@@ -58,6 +58,7 @@ function AddFeature({ features, setFeatures }) {
           features.concat({
             ...response.data,
             testcases: "0",
+            defects: "0",
           })
         );
         console.log(response);

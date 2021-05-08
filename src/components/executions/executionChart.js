@@ -1,7 +1,7 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 
-const ExecutionList = ({ execution, dashboard }) => {
+const ExecutionChart = ({ execution, dashboard }) => {
   const chartData = [
     { title: "passed", value: parseInt(execution.passed), color: "#2cb14a" },
     { title: "failed", value: parseInt(execution.failed), color: "#C13C37" },
@@ -10,7 +10,7 @@ const ExecutionList = ({ execution, dashboard }) => {
 
   if (dashboard) {
     return (
-      <div className="u-full-width">
+      <div className="u-full-width" id="pieChart">
         <PieChart
           data={chartData}
           lineWidth={25}
@@ -32,7 +32,7 @@ const ExecutionList = ({ execution, dashboard }) => {
   }
 
   return (
-    <div className="one-half column graph">
+    <div className="one-half column graph" id="pieChart">
       <PieChart
         data={chartData}
         lineWidth={25}
@@ -51,4 +51,4 @@ const ExecutionList = ({ execution, dashboard }) => {
   );
 };
 
-export default ExecutionList;
+export default ExecutionChart;

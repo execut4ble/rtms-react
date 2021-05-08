@@ -21,9 +21,9 @@ const Testcases = ({ test, tests, setTestcases, testcaseIndex }) => {
 
   return (
     <tr>
-      <td>{test.id}</td>
-      <td>{test.scenario}</td>
-      <td>{formatDate(test.last_execution_date)}</td>
+      <td id="id">{test.id}</td>
+      <td id="scenario">{test.scenario}</td>
+      <td id="lastExecutionDate">{formatDate(test.last_execution_date)}</td>
       <td>
         <div className="six columns">
           <EditTestcase
