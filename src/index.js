@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./pages/home.page";
 import Executions from "./pages/executions.page";
-import Info from "./pages/info.page";
 import Features from "./pages/features.page";
 import PageNotFound from "./pages/404.page";
 import FeatureTests from "./pages/testcases.page";
@@ -12,6 +11,9 @@ import DefectDetails from "./pages/defectDetails.page";
 import Login from "./components/login";
 import useToken from "./components/useToken";
 import Navbar from "./components/navbar";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -23,6 +25,7 @@ function App() {
       {!token && <Login setToken={setToken} />}
       {token && (
         <div>
+          <ToastContainer />
           <Navbar token={token} />
           <Switch>
             <Route exact path="/features" component={Features} />

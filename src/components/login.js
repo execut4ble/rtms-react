@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiclient from "../apiclient";
 import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
 
 async function loginUser(credentials) {
   return apiclient()
@@ -14,15 +15,28 @@ function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
-      email,
-      password,
-    });
-    setToken(token);
+    try {
+      const token = await loginUser({
+        email,
+        password,
+      });
+      setToken(token);
+    } catch (error) {
+      toast.error("Invalid credentials", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
     <div className="section" id="login">
+      <ToastContainer />
       <div className="container">
         <div className="twelve columns">
           <h3 className="section-heading">Login</h3>

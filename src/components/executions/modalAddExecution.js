@@ -6,6 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import FeatureListOptions from "../features/featureOptionsList.js";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function AddExecution({ executions, setExecutions }) {
   const { token } = useToken();
@@ -71,7 +72,15 @@ function AddExecution({ executions, setExecutions }) {
             failed: "0",
           })
         );
-        console.log(response);
+        toast.success("Execution created!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     handleClose();
   };

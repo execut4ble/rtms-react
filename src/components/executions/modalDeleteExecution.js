@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function DeleteExecution({ executionID }) {
   const history = useHistory();
@@ -43,6 +44,15 @@ function DeleteExecution({ executionID }) {
         console.log(response);
 
         history.push("/executions");
+        toast.success("Execution removed!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function AddFeature({ features, setFeatures }) {
   const useStyles = makeStyles((theme) => ({
@@ -61,7 +62,15 @@ function AddFeature({ features, setFeatures }) {
             defects: "0",
           })
         );
-        console.log(response);
+        toast.success("Feature created!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function EditFeature({
   feature,
@@ -67,9 +68,15 @@ function EditFeature({
             created_user: feature.created_user,
           },
         ]);
-        console.log([
-          { ...featureInfo[featureIndex], modified_user: newAuthor },
-        ]);
+        toast.info("Feature updated!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiclient from "../../apiclient";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function WatchButton({ execution, executionID }) {
   const { token } = useToken();
@@ -13,7 +14,15 @@ function WatchButton({ execution, executionID }) {
       .post("/watched/" + executionID)
       .then((response) => {
         setWatchState(true);
-        console.log(response);
+        toast.info(`Started watching ${execution.name}!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 
@@ -24,7 +33,15 @@ function WatchButton({ execution, executionID }) {
       .delete("/watched/" + executionID)
       .then((response) => {
         setWatchState(false);
-        console.log(response);
+        toast.info(`Stopped watching ${execution.name}!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function AddTestcase({ featureID, tests, setTestcases }) {
   const useStyles = makeStyles((theme) => ({
@@ -54,7 +55,15 @@ function AddTestcase({ featureID, tests, setTestcases }) {
             last_execution_date: null,
           })
         );
-        console.log(response);
+        toast.success("Testcase added!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

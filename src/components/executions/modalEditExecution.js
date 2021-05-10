@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function EditExecution({
   execution,
@@ -63,7 +64,15 @@ function EditExecution({
             created_user: execution.created_user,
           },
         ]);
-        console.log(response.data);
+        toast.info("Execution updated!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

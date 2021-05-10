@@ -6,6 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
 import FeatureListOptions from "../features/featureOptionsList";
+import { toast } from "react-toastify";
 
 function AddDefect({ defects, setDefects }) {
   const useStyles = makeStyles((theme) => ({
@@ -71,7 +72,15 @@ function AddDefect({ defects, setDefects }) {
             feature_name: newFeatureName,
           })
         );
-        console.log(response);
+        toast.success("Defect added!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

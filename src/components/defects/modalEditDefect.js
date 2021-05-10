@@ -6,6 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
 import FeatureListOptions from "../features/featureOptionsList";
+import { toast } from "react-toastify";
 
 function EditDefect({
   defect,
@@ -71,7 +72,15 @@ function EditDefect({
             created_user: defect.created_user,
           },
         ]);
-        console.log(defectInfo);
+        toast.info("Defect updated!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();

@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function DeleteDefect({ defectID }) {
   const history = useHistory();
@@ -41,8 +42,16 @@ function DeleteDefect({ defectID }) {
       .delete("/defects/" + defectID)
       .then((response) => {
         console.log(response);
-
         history.push("/defects");
+        toast.success("Defect removed!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function EditTestcase({
   tests,
@@ -61,7 +62,15 @@ function EditTestcase({
         };
         // TODO: Add last execution date
         setTestcases([...tests]);
-        console.log(tests[testcaseIndex]);
+        toast.info("Testcase updated!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     handleClose();
