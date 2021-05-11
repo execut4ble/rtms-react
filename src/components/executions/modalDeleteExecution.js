@@ -53,6 +53,17 @@ function DeleteExecution({ executionID }) {
           draggable: true,
           progress: undefined,
         });
+      })
+      .catch((error) => {
+        toast.error("An error occured!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

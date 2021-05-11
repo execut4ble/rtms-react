@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiclient from "../../apiclient";
 import useToken from "../useToken";
+import { toast } from "react-toastify";
 
 function DefectInfo({ defect, defectID }) {
   const { token } = useToken();
@@ -43,6 +44,17 @@ function DefectInfo({ defect, defectID }) {
       })
       .then((response) => {
         console.log(response.data);
+      })
+      .catch((error) => {
+        toast.error("An error occured!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   }
 

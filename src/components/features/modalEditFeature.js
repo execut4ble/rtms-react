@@ -77,9 +77,31 @@ function EditFeature({
           draggable: true,
           progress: undefined,
         });
+        handleClose();
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          toast.error("Feature already exists!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error("An error occured!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       });
-
-    handleClose();
   };
 
   const handleFeatureChange = (event) => {

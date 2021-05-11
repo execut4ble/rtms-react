@@ -34,6 +34,17 @@ const ExecutionTestsTable = ({ test, executionID }) => {
       })
       .then((response) => {
         console.log(response.data);
+      })
+      .catch((error) => {
+        toast.error("An error occured!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   }
 

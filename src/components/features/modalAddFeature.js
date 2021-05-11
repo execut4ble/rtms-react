@@ -62,6 +62,7 @@ function AddFeature({ features, setFeatures }) {
             defects: "0",
           })
         );
+        handleClose();
         toast.success("Feature created!", {
           position: "top-right",
           autoClose: 5000,
@@ -71,9 +72,30 @@ function AddFeature({ features, setFeatures }) {
           draggable: true,
           progress: undefined,
         });
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          toast.error("Feature already exists!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error("An error occured!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       });
-
-    handleClose();
   };
 
   const handleFeatureChange = (event) => {
