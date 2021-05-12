@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Users from "./pages/users.page";
 
 function App() {
   const { token, setToken } = useToken();
@@ -34,6 +35,7 @@ function App() {
             <Route exact path="/executions/:id" component={ExecuteTests} />
             <Route exact path="/defects" component={Defects} />
             <Route exact path="/defects/:id" component={DefectDetails} />
+            <Route exact path="/users" component={Users} />
             {/* <Route exact path="/info" component={Info} /> */}
             <Route exact path="/" component={Home} />
             <Route render={() => <PageNotFound />} />
