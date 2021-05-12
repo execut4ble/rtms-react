@@ -1,6 +1,6 @@
 import React from "react";
 
-function ExecutionInfo({ execution }) {
+function ExecutionInfo({ execution, isModified }) {
   function formatDate(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
 
@@ -26,9 +26,13 @@ function ExecutionInfo({ execution }) {
         Created by: {execution.created_user} at{" "}
         {formatDate(execution.created_date)}
         <br />
-        Last edited by: {execution.modified_user} at{" "}
-        {formatDate(execution.modified_date)}
       </p>
+      {isModified && (
+        <p>
+          Last edited by: {execution.modified_user} at{" "}
+          {formatDate(execution.modified_date)}
+        </p>
+      )}
     </div>
   );
 }

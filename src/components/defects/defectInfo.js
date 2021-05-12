@@ -3,7 +3,7 @@ import apiclient from "../../apiclient";
 import useToken from "../useToken";
 import { toast } from "react-toastify";
 
-function DefectInfo({ defect, defectID }) {
+function DefectInfo({ defect, defectID, isModified }) {
   const { token } = useToken();
   const [state, setDefectState] = useState(defect.is_active);
   function formatDate(unixTimeStamp) {
@@ -80,9 +80,13 @@ function DefectInfo({ defect, defectID }) {
       <p className="feature-metadata">
         Created by: {defect.created_user} at {formatDate(defect.created_date)}
         <br />
-        Last edited by: {defect.modified_user} at{" "}
-        {formatDate(defect.modified_date)}
       </p>
+      {isModified && (
+        <p className="feature-metadata">
+          Last edited by: {defect.modified_user} at{" "}
+          {formatDate(defect.modified_date)}
+        </p>
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ function EditDefect({
   defectID,
   defectIndex,
   features,
+  setModified,
 }) {
   const { token } = useToken();
   const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ function EditDefect({
             created_user: defect.created_user,
           },
         ]);
+        setModified(true);
         toast.info("Defect updated!", {
           position: "top-right",
           autoClose: 5000,

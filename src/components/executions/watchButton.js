@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import apiclient from "../../apiclient";
 import useToken from "../useToken";
 import { toast } from "react-toastify";
 
 function WatchButton({ execution, executionID }) {
   const { token } = useToken();
-  const [watchState, setWatchState] = useState(execution.watched);
+  const [watchState, setWatchState] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiclient(token)
+      .get("/watched/" + executionID)
+      .then((response) => {
+        setWatchState(response.data[0].watched);
+        setLoading(false);
+      });
+  }, [executionID]);
 
   const handleWatch = (event) => {
     event.preventDefault();
@@ -59,22 +69,35 @@ function WatchButton({ execution, executionID }) {
   if (!watchState) {
     return (
       <div>
-        <button className="crud" type="button" id="watch" onClick={handleWatch}>
-          <i className="fas fa-eye"></i> Watch
-        </button>
+        {!isLoading && (
+          <div>
+            <button
+              className="crud"
+              type="button"
+              id="watch"
+              onClick={handleWatch}
+            >
+              <i className="fas fa-eye"></i> Watch
+            </button>
+          </div>
+        )}
       </div>
     );
   } else {
     return (
       <div>
-        <button
-          className="crud"
-          type="button"
-          id="unwatch"
-          onClick={handleUnwatch}
-        >
-          <i className="fas fa-eye-slash"></i> Unwatch
-        </button>
+        {!isLoading && (
+          <div>
+            <button
+              className="crud"
+              type="button"
+              id="unwatch"
+              onClick={handleUnwatch}
+            >
+              <i className="fas fa-eye-slash"></i> Unwatch
+            </button>
+          </div>
+        )}
       </div>
     );
   }

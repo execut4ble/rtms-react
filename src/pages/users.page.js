@@ -39,12 +39,12 @@ function Users() {
           {!isAuthorized && !isLoading && (
             <div className="section">
               <div className="container">
-                <h3 className="section-heading">
-                  You are not authorized to view this page.
-                </h3>
-                <p className="section-description">
-                  <h6>This is a reserved administrator space.</h6>
-                </p>
+                <center>
+                  <h3 className="section-heading">Access Denied</h3>
+                  <p className="section-description">
+                    <h6>You are not authorized to view this page.</h6>
+                  </p>
+                </center>
               </div>
             </div>
           )}

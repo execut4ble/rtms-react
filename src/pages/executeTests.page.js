@@ -12,12 +12,16 @@ function ExecuteTests(props) {
   const executionID = props.match.params.id;
   const [tests, setTestcases] = useState([]);
   const [executionInfo, setExecutionInfo] = useState([]);
+  const [isModified, setModified] = useState(false);
 
   useEffect(() => {
     apiclient(token)
       .get("/runs/" + executionID)
       .then((response) => {
         setExecutionInfo(response.data);
+        if (response.data[0].modified_date) {
+          setModified(true);
+        }
       });
   }, [executionID]);
 
@@ -36,7 +40,11 @@ function ExecuteTests(props) {
           <div className="row">
             <div className="twelve columns">
               {executionInfo.map((execution, i) => (
-                <ExecutionInfo key={i} execution={execution} />
+                <ExecutionInfo
+                  key={i}
+                  execution={execution}
+                  isModified={isModified}
+                />
               ))}
               <div className="row">
                 <div className="three columns">
@@ -48,6 +56,7 @@ function ExecuteTests(props) {
                       setExecutionInfo={setExecutionInfo}
                       executionID={executionID}
                       executionIndex={i}
+                      setModified={setModified}
                     />
                   ))}
                 </div>

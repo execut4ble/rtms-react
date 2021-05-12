@@ -13,6 +13,7 @@ function EditExecution({
   setExecutionInfo,
   executionID,
   executionIndex,
+  setModified,
 }) {
   const { token } = useToken();
   const useStyles = makeStyles((theme) => ({
@@ -64,6 +65,7 @@ function EditExecution({
             created_user: execution.created_user,
           },
         ]);
+        setModified(true);
         toast.info("Execution updated!", {
           position: "top-right",
           autoClose: 5000,

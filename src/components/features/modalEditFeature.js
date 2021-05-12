@@ -13,6 +13,7 @@ function EditFeature({
   setFeatureInfo,
   featureID,
   featureIndex,
+  setModified,
 }) {
   const { token } = useToken();
   const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,7 @@ function EditFeature({
             created_user: feature.created_user,
           },
         ]);
+        setModified(true);
         toast.info("Feature updated!", {
           position: "top-right",
           autoClose: 5000,

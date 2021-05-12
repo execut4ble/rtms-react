@@ -14,12 +14,16 @@ function FeatureTests(props) {
   const [featureInfo, setFeatureInfo] = useState([]);
   const [isEmpty, setEmpty] = useState(false);
   const { token } = useToken();
+  const [isModified, setModified] = useState(false);
 
   useEffect(() => {
     apiclient(token)
       .get("/features/" + featureID)
       .then((response) => {
         setFeatureInfo(response.data);
+        if (response.data[0].modified_date) {
+          setModified(true);
+        }
       });
   }, [featureID]);
 
@@ -39,7 +43,11 @@ function FeatureTests(props) {
           <div className="row">
             <div className="twelve columns">
               {featureInfo.map((feature, i) => (
-                <FeatureInfo key={i} feature={feature} />
+                <FeatureInfo
+                  key={i}
+                  feature={feature}
+                  isModified={isModified}
+                />
               ))}
               <div className="row">
                 <div className="three columns">
@@ -59,6 +67,7 @@ function FeatureTests(props) {
                       featureInfo={featureInfo}
                       setFeatureInfo={setFeatureInfo}
                       featureID={featureID}
+                      setModified={setModified}
                     />
                   ))}
                 </div>

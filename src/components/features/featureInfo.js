@@ -1,6 +1,6 @@
 import React from "react";
 
-function FeatureInfo({ feature }) {
+function FeatureInfo({ feature, isModified }) {
   function formatDate(unixTimeStamp) {
     var date = new Date(unixTimeStamp * 1000);
 
@@ -27,9 +27,13 @@ function FeatureInfo({ feature }) {
       <p className="feature-metadata">
         Created by: {feature.created_user} at {formatDate(feature.created_date)}
         <br />
-        Last edited by: {feature.modified_user} at{" "}
-        {formatDate(feature.modified_date)}
       </p>
+      {isModified && (
+        <p className="feature-metadata">
+          Last edited by: {feature.modified_user} at{" "}
+          {formatDate(feature.modified_date)}
+        </p>
+      )}
     </div>
   );
 }
