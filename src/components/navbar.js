@@ -85,7 +85,6 @@ const Navbar = () => {
                   horizontal: "center",
                 }}
               >
-                <MenuItem onClick={handleClose}>Preferences</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
