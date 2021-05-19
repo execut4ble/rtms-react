@@ -28,7 +28,7 @@ function ExecutionInfo({ execution, isModified }) {
         <br />
       </p>
       {isModified && (
-        <p>
+        <p className="feature-metadata">
           Last edited by: {execution.modified_user} at{" "}
           {formatDate(execution.modified_date)}
         </p>
